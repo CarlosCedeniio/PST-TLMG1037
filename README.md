@@ -36,7 +36,7 @@ Markdown con las diapositivas separadas por `---`, igual que en Marp. La guía c
 
 ## Publicación
 
-Cada push a `main` se publica en GitHub Pages (`.github/workflows/deploy.yml`) y el sitio se reconstruye a diario para actualizar los sellos "¡Nuevo!" y "Tema dictado".
+Cada push a la rama `2026/pao2` se publica en GitHub Pages (`.github/workflows/deploy.yml`) y el sitio se reconstruye a diario para actualizar los sellos "¡Nuevo!" y "Tema dictado".
 Configuración, una sola vez: **Settings → Pages → Source: GitHub Actions**.
 
 ## Material anterior
