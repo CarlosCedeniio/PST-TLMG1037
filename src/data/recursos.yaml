@@ -263,3 +263,66 @@
   unidad: redes
   tema: tcp-ip-direccionamiento
   descripcion: "Estándar del IETF."
+- id: rfc1035
+  titulo: "RFC 1035: Domain Names, implementation and specification"
+  url: https://www.rfc-editor.org/rfc/rfc1035
+  tipo: documentacion
+  unidad: redes
+  tema: dns-puertos-nat
+  descripcion: "Estándar del IETF."
+- id: iana-puertos
+  titulo: "IANA: registro de puertos y servicios"
+  url: https://www.iana.org/assignments/service-names-port-numbers/
+  tipo: documentacion
+  unidad: redes
+  tema: dns-puertos-nat
+  descripcion: "Registro oficial."
+- id: rfc3022
+  titulo: "RFC 3022: Traditional NAT"
+  url: https://www.rfc-editor.org/rfc/rfc3022
+  tipo: documentacion
+  unidad: redes
+  tema: dns-puertos-nat
+  descripcion: "Estándar del IETF."
+- id: rfc6598
+  titulo: "RFC 6598: espacio de direcciones compartido (CGNAT)"
+  url: https://www.rfc-editor.org/rfc/rfc6598
+  tipo: documentacion
+  unidad: redes
+  tema: dns-puertos-nat
+  descripcion: "Estándar del IETF."
+- id: rfc9110
+  titulo: "RFC 9110: HTTP Semantics"
+  url: https://www.rfc-editor.org/rfc/rfc9110
+  tipo: documentacion
+  unidad: redes
+  tema: http-json
+  descripcion: "Estándar del IETF."
+- id: rfc8259
+  titulo: "RFC 8259: The JSON Data Interchange Format"
+  url: https://www.rfc-editor.org/rfc/rfc8259
+  tipo: documentacion
+  unidad: redes
+  tema: http-json
+  descripcion: "Estándar del IETF."
+- id: owasp-iot
+  titulo: "OWASP Internet of Things Top 10 (2018)"
+  url: https://owasp.org/www-project-internet-of-things/
+  tipo: documentacion
+  unidad: redes
+  tema: seguridad-red
+  descripcion: "Guía de referencia."
+- id: nist-8259a
+  titulo: "NISTIR 8259A: IoT Device Cybersecurity Capability Core Baseline"
+  url: https://doi.org/10.6028/NIST.IR.8259A
+  tipo: documentacion
+  unidad: redes
+  tema: seguridad-red
+  descripcion: "Guía de referencia."
+- id: mirai-usenix
+  titulo: "Understanding the Mirai Botnet (USENIX Security 2017)"
+  url: https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/antonakakis
+  tipo: lectura
+  unidad: redes
+  tema: seguridad-red
+  descripcion: "Artículo académico."

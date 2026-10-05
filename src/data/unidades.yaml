@@ -42,18 +42,34 @@
         Cubre cómo se resuelven nombres, cómo los puertos identifican servicios y por qué un
         dispositivo en una red local no es accesible desde internet. Es la base para entender
         despliegue y conectividad remota.
+      objetivos:
+        - Explicar cómo DNS traduce un nombre de dominio a una dirección IP.
+        - Identificar un servicio por su puerto y distinguir los rangos de puertos.
+        - Explicar cómo funciona NAT y por qué un dispositivo en una red local no es accesible desde internet.
+        - Elegir una forma adecuada de comunicarse con un dispositivo que está detrás de NAT.
     - id: http-json
       titulo: "Protocolo HTTP: métodos, códigos de estado y JSON"
       semana: 3
       resumen: >-
         Enseña la estructura de peticiones y respuestas HTTP y el formato JSON para intercambiar
         datos.
+      objetivos:
+        - Describir la estructura de una petición y de una respuesta HTTP.
+        - Elegir el método HTTP adecuado para cada operación.
+        - Interpretar los códigos de estado más comunes.
+        - Leer y escribir datos en formato JSON válido.
+        - Explicar la diferencia entre HTTP y HTTPS.
     - id: seguridad-red
       titulo: "Seguridad: exposición de puertos y riesgos de red"
       semana: 3
       resumen: >-
         Muestra los riesgos de exponer dispositivos y servicios a internet sin protección, junto
         con buenas prácticas básicas de configuración de red.
+      objetivos:
+        - Explicar qué es la superficie de ataque de un sistema conectado.
+        - Identificar los riesgos de exponer dispositivos y servicios a internet.
+        - "Analizar un caso real: la botnet Mirai."
+        - Aplicar buenas prácticas básicas de configuración de red al proyecto del equipo.
 
 - id: web-apis
   numero: 2

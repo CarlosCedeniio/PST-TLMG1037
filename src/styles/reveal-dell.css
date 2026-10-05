@@ -365,6 +365,23 @@
 
 .reveal .ribbon > ul:not(:first-child), .reveal .ribbon > ol:not(:first-child) { padding-left: 46px; }
 
+/* URL desarmada en partes de colores. */
+.reveal .url { margin: 24px 0 8px; font: 700 24px/1.6 var(--font-mono); white-space: nowrap; }
+.reveal .url span { padding: 2px 6px; border: 2px solid var(--frame-ink); background: var(--tint); }
+.reveal .url-parts { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 12px; }
+
+/* Mensajes crudos (HTTP) dentro de una pila de capas. */
+.reveal .layers code.raw { display: block; padding: 0; background: none; font-size: 19px; line-height: 1.4; white-space: pre; overflow: hidden; }
+
+/* Tablas más pequeñas cuando hay mucho contenido. */
+.reveal .compact table { font-size: 0.62em; }
+.reveal .compact table td, .reveal .compact table th { padding: 6px 12px; }
+
+/* Fila de tarjetas sin flechas. */
+.reveal .flow.gap { gap: 14px; }
+.reveal .flow.gap .node { box-shadow: 3px 3px 0 var(--frame-ink); }
+.reveal .flow .node .big { display: block; font: 900 40px/1 var(--font-display); margin-bottom: 6px; }
+
 /* Diagramas SVG en línea. */
 .reveal svg.diagram { display: block; width: 100%; height: auto; margin: 8px auto; overflow: visible; }
 .reveal svg.diagram text { font-family: var(--font-ui); }
