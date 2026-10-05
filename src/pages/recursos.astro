@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import RibbonCard from '../components/RibbonCard.astro';
+import { getUnidades, getTemas } from '../lib/curso';
+
+const [recursos, unidades, temas] = await Promise.all([getCollection('recursos'), getUnidades(), getTemas()]);
+const grupos = [
+  ...unidades.map((m) => ({ id: m.id, titulo: `Unidad ${m.numero} · ${m.titulo}`, color: m.color, items: recursos.filter((r) => r.data.unidad === m.id) })),
+  { id: 'general', titulo: 'Generales', color: 'steel', items: recursos.filter((r) => !r.data.unidad || !unidades.some((m) => m.id === r.data.unidad)) },
+].filter((g) => g.items.length);
+const TIPOS = { lectura: 'Lectura', video: 'Video', herramienta: 'Herramienta', repositorio: 'Repositorio', documentacion: 'Documentación' } as const;
+const nombreTema = (id?: string) => temas.find((t) => t.id === id);
+---
+<Base titulo="Recursos">
+  <SectionEyebrow titulo="Recursos" color="lime" kicker="Lecturas, videos, herramientas y repositorios" />
+
+  <div class="filtros" role="group" aria-label="Filtrar por unidad">
+    <button class="btn" data-filtro="todos" aria-pressed="true">Todos</button>
+    {grupos.map((g) => <button class="btn btn--secondary" data-filtro={g.id} aria-pressed="false">{g.titulo.split(' · ')[0]}</button>)}
+  </div>
+
+  <div class="list">
+    {grupos.map((g) => (
+      <div data-grupo={g.id}>
+        <RibbonCard titulo={g.titulo} color={g.color}>
+          <ul>
+            {g.items.map((r) => {
+              const t = nombreTema(r.data.tema);
+              return (
+                <li>
+                  <span class="ui-label">[{TIPOS[r.data.tipo]}]</span> <a href={r.data.url} target="_blank" rel="noopener">{r.data.titulo}</a>
+                  {t && <span class="small"> · tema {t.numero}</span>}
+                  {r.data.descripcion && <><br /><span class="small">{r.data.descripcion}</span></>}
+                </li>
+              );
+            })}
+          </ul>
+        </RibbonCard>
+      </div>
+    ))}
+  </div>
+</Base>
+
+<script>
+  const botones = document.querySelectorAll<HTMLButtonElement>('[data-filtro]');
+  const grupos = document.querySelectorAll<HTMLElement>('[data-grupo]');
+  botones.forEach((b) =>
+    b.addEventListener('click', () => {
+      const f = b.dataset.filtro;
+      botones.forEach((x) => {
+        const on = x === b;
+        x.setAttribute('aria-pressed', String(on));
+        x.classList.toggle('btn--secondary', !on);
+      });
+      grupos.forEach((g) => (g.hidden = f !== 'todos' && g.dataset.grupo !== f));
+    }),
+  );
+</script>
+
+<style>
+  .filtros { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-top: var(--sp-xxl); }
+  .list { display: grid; gap: var(--sp-xxl); margin-top: var(--sp-xxl); }
+  li + li { margin-top: var(--sp-xs); }
+</style>

@@ -1,0 +1,45 @@
+---
+import { url } from '../lib/curso';
+
+const items = [
+  { href: url(), label: 'Inicio' },
+  { href: url('cronograma'), label: 'Cronograma' },
+  { href: url('unidades'), label: 'Unidades' },
+  { href: url('evaluaciones'), label: 'Evaluaciones' },
+  { href: url('recursos'), label: 'Recursos' },
+];
+const actual = Astro.url.pathname.replace(/\/$/, '') || '/';
+const activo = (href: string) => {
+  const h = href.replace(/\/$/, '');
+  return h === url().replace(/\/$/, '') ? actual === h : actual === h || actual.startsWith(h + '/');
+};
+---
+<nav class="main-nav" aria-label="Principal">
+  <ul>
+    {items.map((i) => (
+      <li><a class="ui-label" href={i.href} aria-current={activo(i.href) ? 'page' : undefined}>{i.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .main-nav { border-bottom: var(--hairline); background: var(--canvas); }
+  ul { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+  li { border-right: var(--hairline); }
+  a {
+    display: block;
+    padding: var(--sp-m) var(--sp-md);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+  a[aria-current='page'] { background: var(--frame-ink); color: var(--canvas); }
+  @media (max-width: 480px) {
+    ul { display: grid; grid-template-columns: repeat(3, 1fr); }
+    li { border-bottom: var(--hairline); }
+    /* Si sobran celdas en la última fila, el último ítem las ocupa. */
+    li:last-child:nth-child(3n + 2) { grid-column: span 2; }
+    li:last-child:nth-child(3n + 1) { grid-column: span 3; }
+    a { min-height: 44px; display: flex; align-items: center; justify-content: center; }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionEyebrow from '../components/SectionEyebrow.astro';
+import SemanaActual from '../components/SemanaActual.astro';
+import {
+  getCurso, getSemanas, getTemas, getEvaluaciones, getCalendario,
+  url, iso, fecha, rangoSemana, dentroDe, rutaTema,
+} from '../lib/curso';
+
+const [curso, semanas, temas, evaluaciones, calendario] = await Promise.all([
+  getCurso(), getSemanas(), getTemas(), getEvaluaciones(), getCalendario(),
+]);
+
+const filas = semanas.map((s) => ({
+  semana: s,
+  temas: temas.filter((t) => t.semana === s.numero),
+  eventos: [
+    ...calendario.filter((c) => dentroDe(c.fecha, s)).map((c) => ({ fecha: c.fecha, texto: c.titulo, tipo: c.tipo, href: undefined })),
+    ...evaluaciones.filter((e) => dentroDe(e.data.entrega, s)).map((e) => ({
+      fecha: e.data.entrega, texto: ['examen', 'proyecto'].includes(e.data.tipo) ? e.data.titulo : `Entrega: ${e.data.titulo}`, tipo: e.data.tipo, href: url(`evaluaciones/${e.id}`),
+    })),
+  ].sort((a, b) => a.fecha.getTime() - b.fecha.getTime()),
+}));
+---
+<Base titulo="Cronograma">
+  <SectionEyebrow titulo="Cronograma" color="sky" kicker={`${curso.periodo} · ${curso.semanas} semanas`} />
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead>
+        <tr><th aria-label="Color de la unidad"></th><th>Sem.</th><th>Fechas</th><th>Tema</th><th>Fechas importantes</th></tr>
+      </thead>
+      <tbody>
+        {filas.map(({ semana, temas, eventos }) => (
+          <tr data-desde={iso(semana.inicio)} data-hasta={iso(semana.fin)}>
+            <td class={`swatch ${temas[0] ? `tint-${temas[0].unidad.color}` : ''}`}></td>
+            <td><strong>{semana.numero}</strong></td>
+            <td class="nowrap">{rangoSemana(semana)}</td>
+            <td>
+              {semana.etiqueta && <span class="sticker">{semana.etiqueta}</span>}
+              {temas.map((t) => (
+                <div><span class="small">U{t.unidad.numero} · </span><a href={rutaTema(t)}>{t.numero} {t.titulo}</a></div>
+              ))}
+            </td>
+            <td>
+              {eventos.map((e) => (
+                <div>
+                  <span class="ui-label">{fecha(e.fecha, { weekday: 'short', day: 'numeric' })}</span>{' '}
+                  {e.href ? <a href={e.href}>{e.texto}</a> : e.texto}
+                </div>
+              ))}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <SemanaActual />
+</Base>
+
+<style>
+  .table-wrap { margin-top: var(--sp-section-sm); }
+  .nowrap { white-space: nowrap; }
+  td div + div { margin-top: var(--sp-xs); }
+  td .sticker { margin-bottom: var(--sp-xs); }
+</style>

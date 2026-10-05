@@ -1,0 +1,79 @@
+---
+import 'reveal.js/reveal.css';
+import '../styles/reveal-dell.css';
+import { getCurso, url } from '../lib/curso';
+
+interface Props {
+  titulo: string;
+  subtitulo?: string;
+  kicker: string;
+  /** Texto de la franja negra superior de cada diapositiva. */
+  franja: string;
+  color: string;
+  volver: string;
+  markdown: string;
+}
+const { titulo, subtitulo, kicker, franja, color, volver, markdown } = Astro.props;
+const curso = await getCurso();
+const pie = `${curso.sigla} · ${curso.codigo} · ${curso.periodo} · ${curso.docente.nombre}`;
+const vars = `--strip: ${JSON.stringify(franja)}; --footer: ${JSON.stringify(pie)};`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo} · {curso.sigla} {curso.periodo}</title>
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="deck-back" href={volver}>◄ Volver</a>
+    <div class={`reveal tint-${color}`} style={vars}>
+      <div class="slides">
+        <section class="portada">
+          <div class="eyebrow-block">
+            <p class="kicker">{kicker}</p>
+            <h1>{titulo}</h1>
+            {subtitulo && <p class="subtitulo">{subtitulo}</p>}
+          </div>
+          <div class="firma">
+            <span>{curso.docente.nombre} · {curso.institucion}</span>
+            <span class="codigo">{curso.codigo}</span>
+          </div>
+        </section>
+        <section data-markdown data-separator="^---$" data-separator-vertical="^--$" data-separator-notes="^Note:">
+          <textarea data-template set:text={markdown} />
+        </section>
+      </div>
+    </div>
+
+    <script>
+      import Reveal from 'reveal.js';
+      import Markdown from 'reveal.js/plugin/markdown';
+      import Highlight from 'reveal.js/plugin/highlight';
+      import Notes from 'reveal.js/plugin/notes';
+      import Zoom from 'reveal.js/plugin/zoom';
+
+      const imprimir = new URLSearchParams(location.search).has('print-pdf');
+      const deck = new Reveal({
+        width: 1280,
+        height: 720,
+        // Sin margen al imprimir: cada página del PDF mide exactamente 1280×720.
+        margin: imprimir ? 0 : 0.03,
+        center: false,
+        hash: true,
+        slideNumber: 'c/t',
+        transition: 'none',
+        backgroundTransition: 'none',
+        pdfMaxPagesPerSlide: 1,
+        pdfSeparateFragments: false,
+        // En móvil se escala la diapositiva completa en vez de usar la vista de scroll.
+        scrollActivationWidth: null,
+        plugins: [Markdown, Highlight, Notes, Zoom],
+      });
+      deck.initialize().then(() => {
+        if (imprimir) setTimeout(() => window.print(), 800);
+      });
+    </script>
+  </body>
+</html>

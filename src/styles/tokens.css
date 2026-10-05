@@ -1,0 +1,74 @@
+/* Tokens tomados de DESIGN.md (Dell 1996 Inspired), con fuentes web en lugar de las del sistema. */
+@import '@fontsource/archivo-black/400.css';
+@import '@fontsource/archivo/400.css';
+@import '@fontsource/archivo/700.css';
+@import '@fontsource-variable/source-serif-4/opsz.css';
+@import '@fontsource-variable/source-serif-4/opsz-italic.css';
+
+:root {
+  --primary: #e91d2a;
+  --on-primary: #ffffff;
+  --canvas: #ffffff;
+  --surface: #ffffff;
+  --ink: #000000;
+  --frame-ink: #000000;
+  --yellow-sticker: #fcc20f;
+  --purple-stripe: #6a26a4;
+  --link: #0000ee;
+
+  --tint-olive: #8e8a25;
+  --tint-sage: #b3bd95;
+  --tint-salmon: #d77a7a;
+  --tint-peach: #e6915d;
+  --tint-lime: #c0d4a7;
+  --tint-sky: #9ab6c8;
+  --tint-steel: #a5b8c0;
+  --tint-periwinkle: #8c9ae0;
+
+  --font-display: 'Archivo Black', 'Arial Black', Helvetica, system-ui, sans-serif;
+  --font-ui: 'Archivo', Helvetica, Arial, system-ui, sans-serif;
+  --font-body: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Courier New', Courier, ui-monospace, monospace;
+
+  --fs-display: 36px;
+  --fs-h1: 24px;
+  --fs-h2: 16px;
+  --fs-h3: 14px;
+  --fs-body: 14px;
+  --fs-body-sm: 12px;
+  --fs-caption: 11px;
+  --fs-button: 12px;
+
+  --sp-xxs: 2px;
+  --sp-xs: 4px;
+  --sp-s: 6px;
+  --sp-sm: 8px;
+  --sp-m: 10px;
+  --sp-md: 12px;
+  --sp-lg: 16px;
+  --sp-xl: 20px;
+  --sp-xxl: 24px;
+  --sp-section-sm: 32px;
+  --sp-section: 40px;
+  --sp-section-lg: 48px;
+
+  --frame: 8px;
+  --hairline: 1px solid var(--frame-ink);
+  --bevel: 2px 2px 0 var(--frame-ink);
+}
+
+@media (max-width: 768px) {
+  :root { --frame: 4px; }
+}
+@media (max-width: 480px) {
+  :root { --frame: 2px; }
+}
+
+.tint-olive { --tint: var(--tint-olive); }
+.tint-sage { --tint: var(--tint-sage); }
+.tint-salmon { --tint: var(--tint-salmon); }
+.tint-peach { --tint: var(--tint-peach); }
+.tint-lime { --tint: var(--tint-lime); }
+.tint-sky { --tint: var(--tint-sky); }
+.tint-steel { --tint: var(--tint-steel); }
+.tint-periwinkle { --tint: var(--tint-periwinkle); }

@@ -1,0 +1,265 @@
+# Enlaces del curso. unidad y tema son opcionales (ids de unidades.yaml).
+# tipo: lectura | video | herramienta | repositorio | documentacion
+# Los marcados como bibliografía vienen de la sección 10 del PDF de planificación.
+- id: mdn
+  titulo: "MDN Web Docs: HTML, CSS y JavaScript"
+  url: https://developer.mozilla.org/es/
+  tipo: documentacion
+  unidad: web-apis
+  tema: frontend
+  descripcion: "Referencia de la bibliografía del curso."
+- id: mdn-http
+  titulo: "MDN: Introducción a HTTP"
+  url: https://developer.mozilla.org/es/docs/Web/HTTP/Overview
+  tipo: documentacion
+  unidad: redes
+  tema: http-json
+- id: fastapi
+  titulo: "Documentación de FastAPI"
+  url: https://fastapi.tiangolo.com/es/
+  tipo: documentacion
+  unidad: web-apis
+  tema: backend
+  descripcion: "Referencia de la bibliografía del curso."
+- id: express
+  titulo: "Documentación de Express"
+  url: https://expressjs.com/es/
+  tipo: documentacion
+  unidad: web-apis
+  tema: backend
+- id: sqlite
+  titulo: "Documentación de SQLite"
+  url: https://www.sqlite.org/docs.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: sqlite
+- id: firebase
+  titulo: "Firebase"
+  url: https://firebase.google.com/docs
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Backend como servicio."
+- id: supabase
+  titulo: "Supabase"
+  url: https://supabase.com/docs
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Backend como servicio."
+- id: appwrite
+  titulo: "Appwrite"
+  url: https://appwrite.io/docs
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Backend como servicio."
+- id: vercel
+  titulo: "Vercel"
+  url: https://vercel.com/docs
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de frontend."
+- id: netlify
+  titulo: "Netlify"
+  url: https://docs.netlify.com/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de frontend."
+- id: cloudflare-pages
+  titulo: "Cloudflare Pages"
+  url: https://developers.cloudflare.com/pages/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de frontend."
+- id: railway
+  titulo: "Railway"
+  url: https://docs.railway.com/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de backend."
+- id: render
+  titulo: "Render"
+  url: https://render.com/docs
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de backend."
+- id: fly
+  titulo: "Fly.io"
+  url: https://fly.io/docs/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Hosting de backend."
+- id: adafruit-io
+  titulo: "Adafruit IO"
+  url: https://io.adafruit.com/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Plataforma IoT lista."
+- id: thingspeak
+  titulo: "ThingSpeak"
+  url: https://thingspeak.mathworks.com/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Plataforma IoT lista."
+- id: blynk
+  titulo: "Blynk"
+  url: https://docs.blynk.io/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Plataforma IoT lista."
+- id: lovable
+  titulo: "Lovable"
+  url: https://lovable.dev/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Constructor de apps con IA."
+- id: bolt
+  titulo: "Bolt"
+  url: https://bolt.new/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Constructor de apps con IA."
+- id: replit
+  titulo: "Replit"
+  url: https://replit.com/
+  tipo: herramienta
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Constructor de apps con IA."
+- id: ttn
+  titulo: "Documentación de The Things Network"
+  url: https://www.thethingsnetwork.org/docs/
+  tipo: documentacion
+  unidad: conectividad
+  tema: lorawan
+  descripcion: "Referencia de la bibliografía del curso."
+- id: lorawan
+  titulo: "LoRa Alliance: qué es LoRaWAN"
+  url: https://lora-alliance.org/about-lorawan/
+  tipo: lectura
+  unidad: conectividad
+  tema: lpwan
+- id: mqtt-org
+  titulo: "MQTT: el estándar de mensajería para IoT"
+  url: https://mqtt.org/
+  tipo: documentacion
+  unidad: conectividad
+  tema: pub-sub
+- id: hivemq-essentials
+  titulo: "HiveMQ: MQTT Essentials"
+  url: https://www.hivemq.com/mqtt-essentials/
+  tipo: lectura
+  unidad: conectividad
+  tema: broker-mqtt
+  descripcion: "Serie en línea de la bibliografía del curso."
+- id: mosquitto
+  titulo: "Documentación de Eclipse Mosquitto"
+  url: https://mosquitto.org/documentation/
+  tipo: documentacion
+  unidad: conectividad
+  tema: broker-mqtt
+  descripcion: "Referencia de la bibliografía del curso."
+- id: postgresql
+  titulo: "Tutorial oficial de PostgreSQL"
+  url: https://www.postgresql.org/docs/current/tutorial.html
+  tipo: documentacion
+  unidad: datos
+  tema: postgresql
+- id: mongodb
+  titulo: "Documentación de MongoDB"
+  url: https://www.mongodb.com/docs/
+  tipo: documentacion
+  unidad: datos
+  tema: documentales
+- id: firestore
+  titulo: "Documentación de Firestore"
+  url: https://firebase.google.com/docs/firestore
+  tipo: documentacion
+  unidad: datos
+  tema: documentales
+- id: redis
+  titulo: "Documentación de Redis"
+  url: https://redis.io/docs/latest/
+  tipo: documentacion
+  unidad: datos
+  tema: redis
+- id: neo4j
+  titulo: "Documentación de Neo4j"
+  url: https://neo4j.com/docs/
+  tipo: documentacion
+  unidad: datos
+  tema: grafos
+- id: influxdb
+  titulo: "Documentación de InfluxDB"
+  url: https://docs.influxdata.com/
+  tipo: documentacion
+  unidad: datos
+  tema: series-de-tiempo
+  descripcion: "Referencia de la bibliografía del curso."
+- id: grafana
+  titulo: "Documentación de Grafana"
+  url: https://grafana.com/docs/grafana/latest/
+  tipo: documentacion
+  unidad: datos
+  tema: series-de-tiempo
+- id: docker
+  titulo: "Documentación de Docker"
+  url: https://docs.docker.com/
+  tipo: documentacion
+  unidad: datos
+  tema: docker-despliegue
+  descripcion: "Referencia de la bibliografía del curso."
+- id: itu-y2060
+  titulo: "ITU-T Y.2060: Overview of the Internet of things"
+  url: https://www.itu.int/rec/T-REC-Y.2060-201206-I
+  tipo: documentacion
+  unidad: redes
+  tema: arquitectura-end-to-end
+  descripcion: "Modelo de referencia de IoT."
+- id: rfc1122
+  titulo: "RFC 1122: requisitos de los hosts de internet (capas TCP/IP)"
+  url: https://www.rfc-editor.org/rfc/rfc1122
+  tipo: documentacion
+  unidad: redes
+  tema: tcp-ip-direccionamiento
+  descripcion: "Estándar del IETF."
+- id: rfc791
+  titulo: "RFC 791: Internet Protocol (IPv4)"
+  url: https://www.rfc-editor.org/rfc/rfc791
+  tipo: documentacion
+  unidad: redes
+  tema: tcp-ip-direccionamiento
+  descripcion: "Estándar del IETF."
+- id: rfc4632
+  titulo: "RFC 4632: CIDR"
+  url: https://www.rfc-editor.org/rfc/rfc4632
+  tipo: documentacion
+  unidad: redes
+  tema: tcp-ip-direccionamiento
+  descripcion: "Estándar del IETF."
+- id: rfc1918
+  titulo: "RFC 1918: direcciones privadas"
+  url: https://www.rfc-editor.org/rfc/rfc1918
+  tipo: documentacion
+  unidad: redes
+  tema: tcp-ip-direccionamiento
+  descripcion: "Estándar del IETF."
+- id: rfc2131
+  titulo: "RFC 2131: Dynamic Host Configuration Protocol (DHCP)"
+  url: https://www.rfc-editor.org/rfc/rfc2131
+  tipo: documentacion
+  unidad: redes
+  tema: tcp-ip-direccionamiento
+  descripcion: "Estándar del IETF."

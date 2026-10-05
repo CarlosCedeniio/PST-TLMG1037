@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import SectionEyebrow from '../../../components/SectionEyebrow.astro';
+import RibbonCard from '../../../components/RibbonCard.astro';
+import { getTemas, getEvaluaciones, url, fecha, rutaTema, rutaSlides, type Tema } from '../../../lib/curso';
+
+export async function getStaticPaths() {
+  const temas = await getTemas();
+  return temas.map((tema, i) => ({
+    params: { unidad: tema.unidad.id, tema: tema.id },
+    props: { tema, anterior: temas[i - 1], siguiente: temas[i + 1] },
+  }));
+}
+
+const { tema, anterior, siguiente } = Astro.props as { tema: Tema; anterior?: Tema; siguiente?: Tema };
+const recursos = (await getCollection('recursos'))
+  .filter((r) => r.data.tema === tema.id || (r.data.unidad === tema.unidad.id && !r.data.tema))
+  .sort((a, b) => (a.data.descripcion ?? '').localeCompare(b.data.descripcion ?? '') || a.data.titulo.localeCompare(b.data.titulo, 'es', { numeric: true }));
+const evaluaciones = (await getEvaluaciones()).filter((e) => e.data.unidad === tema.unidad.id);
+const kicker = `Unidad ${tema.unidad.numero} · ${tema.unidad.titulo}`;
+---
+<Base titulo={`${tema.numero} ${tema.titulo}`} descripcion={tema.resumen || undefined}>
+  <SectionEyebrow titulo={`${tema.numero} ${tema.titulo}`} color={tema.unidad.color} kicker={kicker}>
+    {tema.resumen && <p>{tema.resumen}</p>}
+    <div class="btn-row">
+      {tema.slides ? (
+        <>
+          <a class="btn" href={rutaSlides(tema)}>Ver diapositivas</a>
+          <a class="btn btn--secondary" href={`${rutaSlides(tema)}?print-pdf`} target="_blank" rel="noopener">Exportar PDF</a>
+        </>
+      ) : (
+        <span class="sticker">Diapositivas próximamente</span>
+      )}
+    </div>
+  </SectionEyebrow>
+
+  <div class="cols">
+    {tema.contenidos.length > 0 && (
+      <RibbonCard titulo="Contenidos" color={tema.unidad.color}>
+        <ul>{tema.contenidos.map((c) => <li>{c}</li>)}</ul>
+      </RibbonCard>
+    )}
+
+    {tema.objetivos.length > 0 && (
+      <RibbonCard titulo="Objetivos de la clase" color={tema.unidad.color}>
+        <ul>{tema.objetivos.map((o) => <li>{o}</li>)}</ul>
+      </RibbonCard>
+    )}
+
+    <RibbonCard titulo="Recursos" color="lime">
+      {recursos.length ? (
+        <ul>{recursos.map((r) => <li><a href={r.data.url} target="_blank" rel="noopener">{r.data.titulo}</a> <span class="small">({r.data.descripcion ?? (r.data.tipo === 'documentacion' ? 'documentación' : r.data.tipo)})</span></li>)}</ul>
+      ) : <p>Aún no hay recursos para este tema.</p>}
+    </RibbonCard>
+
+    {evaluaciones.length > 0 && (
+      <RibbonCard titulo="Evaluaciones de la unidad" color="salmon">
+        <ul>{evaluaciones.map((e) => <li><a href={url(`evaluaciones/${e.id}`)}>{e.data.titulo}</a> · entrega {fecha(e.data.entrega)}</li>)}</ul>
+      </RibbonCard>
+    )}
+  </div>
+
+  <nav class="pager" aria-label="Temas">
+    {anterior ? <a class="btn btn--secondary" href={rutaTema(anterior)}>← {anterior.numero} {anterior.titulo}</a> : <span />}
+    {siguiente && <a class="btn btn--secondary" href={rutaTema(siguiente)}>{siguiente.numero} {siguiente.titulo} →</a>}
+  </nav>
+</Base>
+
+<style>
+  .cols { display: grid; gap: var(--sp-xxl); margin-top: var(--sp-section-sm); }
+  .cols :global(.ribbon + .ribbon) { margin-top: 0; }
+  .pager { display: flex; justify-content: space-between; gap: var(--sp-md); flex-wrap: wrap; margin-top: var(--sp-section); }
+  .pager .btn { white-space: normal; line-height: 1.2; }
+</style>

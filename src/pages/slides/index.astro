@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
+import { getUnidades, getTemas, rutaSlides, rutaTema, url } from '../../lib/curso';
+
+const [unidades, temas] = await Promise.all([getUnidades(), getTemas()]);
+---
+<Base titulo="Diapositivas">
+  <SectionEyebrow titulo="Diapositivas" color="peach" kicker="Para ver en el navegador o exportar a PDF">
+    <p>Usa las flechas para avanzar, <strong>F</strong> para pantalla completa y <strong>Esc</strong> para ver todas las diapositivas.</p>
+  </SectionEyebrow>
+
+  <div class="table-wrap">
+    <table class="data">
+      <thead><tr><th aria-label="Color de la unidad"></th><th>Tema</th><th>Semana</th><th>Diapositivas</th></tr></thead>
+      <tbody>
+        {unidades.map((m) => temas.filter((t) => t.unidad.id === m.id).map((t) => (
+          <tr>
+            <td class={`swatch tint-${m.color}`}></td>
+            <td><a href={rutaTema(t)}>{t.numero} {t.titulo}</a></td>
+            <td>{t.semana}</td>
+            <td>
+              {t.slides
+                ? <><a href={rutaSlides(t)}>Ver</a> · <a href={`${rutaSlides(t)}?print-pdf`} target="_blank" rel="noopener">PDF</a></>
+                : <span class="small">Próximamente</span>}
+            </td>
+          </tr>
+        )))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small"><a href={url('slides/guia/plantilla')}>Plantilla de diapositivas</a> (guía de estilo del docente).</p>
+</Base>
+
+<style>
+  .table-wrap { margin-top: var(--sp-section-sm); }
+</style>

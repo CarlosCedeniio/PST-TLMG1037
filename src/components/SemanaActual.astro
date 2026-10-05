@@ -1,0 +1,25 @@
+---
+/**
+ * Marca la semana actual en el navegador (el sitio es estático, así que "hoy" se calcula en el cliente).
+ * - [data-desde][data-hasta]: recibe la clase .is-current si hoy cae en el rango.
+ * - [data-solo-actual]: se muestra solo si es la semana actual.
+ * - [data-antes] / [data-despues]: se muestran si hoy es antes del inicio o después del fin del curso.
+ */
+---
+<script>
+  const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Guayaquil' }).format(new Date());
+  const rangos = [...document.querySelectorAll<HTMLElement>('[data-desde][data-hasta]')];
+  let encontrado = false;
+  for (const el of rangos) {
+    const actual = el.dataset.desde! <= hoy && hoy <= el.dataset.hasta!;
+    el.classList.toggle('is-current', actual);
+    if (el.hasAttribute('data-solo-actual')) el.hidden = !actual;
+    encontrado ||= actual;
+  }
+  if (!encontrado && rangos.length) {
+    const inicio = rangos.map((r) => r.dataset.desde!).sort()[0];
+    const fin = rangos.map((r) => r.dataset.hasta!).sort().at(-1)!;
+    document.querySelectorAll<HTMLElement>('[data-antes]').forEach((el) => (el.hidden = !(hoy < inicio)));
+    document.querySelectorAll<HTMLElement>('[data-despues]').forEach((el) => (el.hidden = !(hoy > fin)));
+  }
+</script>

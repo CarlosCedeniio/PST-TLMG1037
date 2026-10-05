@@ -1,0 +1,38 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
+import { getEvaluaciones, getUnidades, url, fecha } from '../../lib/curso';
+
+export async function getStaticPaths() {
+  const evaluaciones = await getEvaluaciones();
+  return evaluaciones.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<'evaluaciones'> };
+const { Content } = await render(entry);
+const unidad = (await getUnidades()).find((m) => m.id === entry.data.unidad);
+---
+<Base titulo={entry.data.titulo}>
+  <SectionEyebrow titulo={entry.data.titulo} color={unidad?.color ?? 'steel'} kicker={entry.data.tipo}>
+    <dl class="meta-list">
+      <dt>Entrega</dt><dd>{fecha(entry.data.entrega, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</dd>
+      {unidad && <><dt>Unidad</dt><dd><a href={url(`unidades/${unidad.id}`)}>{unidad.numero}. {unidad.titulo}</a></dd></>}
+      {entry.data.peso && <><dt>Peso</dt><dd>{entry.data.peso}</dd></>}
+    </dl>
+    {entry.data.enlace && <div class="btn-row"><a class="btn" href={entry.data.enlace} target="_blank" rel="noopener">Entregar / enunciado</a></div>}
+  </SectionEyebrow>
+
+  <article class="prose">
+    <Content />
+  </article>
+
+  <p><a class="btn btn--secondary" href={url('evaluaciones')}>◄ Todas las evaluaciones</a></p>
+</Base>
+
+<style>
+  .prose { margin-top: var(--sp-section-sm); }
+  .prose :global(table) { border-collapse: collapse; }
+  .prose :global(th) { background: var(--frame-ink); color: var(--canvas); font-family: var(--font-ui); text-align: left; padding: var(--sp-s) var(--sp-md); }
+  .prose :global(td) { border: var(--hairline); padding: var(--sp-s) var(--sp-md); }
+</style>

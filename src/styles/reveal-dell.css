@@ -1,0 +1,448 @@
+/*
+ * Tema reveal.js "Dell 1996" para PST.
+ * Cada diapositiva es una página de 1280×720 con su propio marco, franja superior y pie,
+ * así se ve igual en pantalla y en el PDF (?print-pdf).
+ */
+@import './tokens.css';
+
+:root {
+  --r-background-color: var(--frame-ink);
+  --r-main-font: var(--font-body);
+  --r-main-font-size: 30px;
+  --r-main-color: var(--ink);
+  --r-heading-font: var(--font-display);
+  --r-heading-color: var(--ink);
+  --r-heading-line-height: 1.05;
+  --r-heading-letter-spacing: 0;
+  --r-heading-text-transform: uppercase;
+  --r-heading-font-weight: 900;
+  --r-heading-margin: 0 0 20px;
+  --r-code-font: var(--font-mono);
+  --r-link-color: var(--link);
+  --r-link-color-hover: var(--primary);
+  --r-selection-background-color: var(--yellow-sticker);
+  --r-selection-color: var(--ink);
+  --r-block-margin: 18px;
+
+  /* La diapositiva se escala entera: el marco no se adelgaza en pantallas chicas. */
+  --frame: 8px;
+  --slide-pad-x: 64px;
+  --strip-h: 44px;
+  --foot-h: 34px;
+}
+
+.reveal-viewport { background: var(--frame-ink); }
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  color: var(--r-main-color);
+  line-height: 1.35;
+}
+.reveal ::selection { background: var(--r-selection-background-color); color: var(--r-selection-color); }
+
+/* ─── La página-diapositiva ─── */
+.reveal .slides { text-align: left; }
+.reveal .slides section:not(.stack) {
+  height: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--strip-h) + 36px) var(--slide-pad-x) calc(var(--foot-h) + 24px);
+  background: var(--canvas);
+  border: var(--frame) solid var(--frame-ink);
+  overflow: hidden;
+}
+
+.reveal .slides section:not(.stack)::before,
+.reveal .slides section:not(.stack)::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-xl);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reveal .slides section:not(.stack)::before {
+  content: var(--strip, 'PST');
+  top: 0;
+  height: var(--strip-h);
+  background: var(--frame-ink);
+  color: var(--canvas);
+  font-size: 16px;
+}
+.reveal .slides section:not(.stack)::after {
+  content: var(--footer, '');
+  bottom: 0;
+  height: var(--foot-h);
+  border-top: 1px solid var(--frame-ink);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 12px;
+}
+
+/* ─── Tipografía ─── */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: 0;
+  text-transform: var(--r-heading-text-transform);
+  overflow-wrap: break-word;
+}
+.reveal h1 { font-size: 52px; padding-bottom: 12px; border-bottom: 3px solid var(--frame-ink); }
+.reveal h2 { font-size: 36px; }
+.reveal h3, .reveal h4 { font-family: var(--font-ui); font-weight: 700; font-size: 28px; }
+
+.reveal p { margin: var(--r-block-margin) 0; }
+.reveal strong, .reveal b { font-weight: 700; }
+.reveal em { font-style: italic; }
+
+.reveal ul, .reveal ol { display: block; margin: 0 0 0 1.1em; padding: 0; }
+.reveal ul { list-style: square; }
+.reveal li { margin: 6px 0; }
+.reveal li > ul, .reveal li > ol { margin-top: 4px; font-size: 0.9em; }
+.reveal li::marker { color: var(--frame-ink); }
+
+.reveal a { color: var(--r-link-color); text-decoration: underline; }
+.reveal a:hover { color: var(--r-link-color-hover); }
+
+.reveal blockquote {
+  margin: var(--r-block-margin) 0;
+  padding: 16px 20px;
+  background: var(--tint, var(--tint-sage));
+  border: 1px solid var(--frame-ink);
+  font-style: italic;
+}
+.reveal blockquote p:first-child { margin-top: 0; }
+.reveal blockquote p:last-child { margin-bottom: 0; }
+
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 100%;
+  max-height: 440px;
+  border: 2px solid var(--frame-ink);
+  box-shadow: 6px 6px 0 var(--frame-ink);
+}
+.reveal img.plain, .reveal .plain img { border: 0; box-shadow: none; }
+.reveal .center, .reveal img.center { display: block; margin-left: auto; margin-right: auto; text-align: center; }
+
+.reveal table { border-collapse: collapse; font-size: 0.75em; margin: var(--r-block-margin) 0; }
+.reveal table th {
+  background: var(--frame-ink);
+  color: var(--canvas);
+  font-family: var(--font-ui);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 8px 14px;
+}
+.reveal table td { border: 1px solid var(--frame-ink); padding: 8px 14px; }
+
+/* ─── Código ─── */
+.reveal code { font-family: var(--r-code-font); font-size: 0.9em; background: var(--tint-lime); padding: 0 4px; }
+.reveal pre {
+  position: relative; /* los pasos de resaltado ([1|3-5]) se apilan encima */
+  width: 100%;
+  margin: var(--r-block-margin) 0;
+  font-size: 20px;
+  line-height: 1.3;
+  border: 1px solid var(--frame-ink);
+  box-shadow: 6px 6px 0 var(--tint, var(--tint-sage)), 7px 7px 0 var(--frame-ink);
+}
+.reveal pre code {
+  display: block;
+  max-height: 420px;
+  overflow: auto;
+  padding: 14px 18px;
+  font-size: 22px;
+  line-height: 1.35;
+  background: var(--frame-ink);
+  color: var(--canvas);
+}
+.hljs-comment, .hljs-quote { color: var(--tint-steel); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-built_in { color: var(--yellow-sticker); font-weight: 700; }
+.hljs-string, .hljs-attr, .hljs-template-tag { color: var(--tint-lime); }
+.hljs-number, .hljs-symbol, .hljs-bullet { color: var(--tint-peach); }
+.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id, .hljs-selector-class { color: var(--tint-sky); font-weight: 700; }
+.hljs-type, .hljs-attribute, .hljs-variable, .hljs-params { color: var(--tint-periwinkle); }
+.hljs-meta, .hljs-tag { color: var(--tint-salmon); }
+.hljs-deletion { background: var(--primary); }
+.hljs-addition { background: var(--tint-olive); }
+.reveal .hljs.has-highlights tr:not(.highlight-line) { opacity: 0.35; }
+.reveal .hljs-ln-numbers { color: var(--tint-steel); padding-right: 12px; }
+
+/* ─── Componentes Dell dentro de las diapositivas ─── */
+.reveal .ribbon { border: 1px solid var(--frame-ink); margin: var(--r-block-margin) 0; }
+.reveal .ribbon > :first-child {
+  margin: 0;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--frame-ink);
+  background: var(--canvas);
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.reveal .ribbon > :not(:first-child) { margin: 0; padding: 12px 16px; background: var(--tint, var(--tint-sage)); }
+
+.reveal .cta-red {
+  background: var(--primary);
+  color: var(--on-primary);
+  border: 1px solid var(--frame-ink);
+  padding: 18px 22px;
+}
+.reveal .cta-red a { color: var(--on-primary); }
+
+.reveal .sticker {
+  display: inline-block;
+  background: var(--yellow-sticker);
+  color: var(--ink);
+  border: 1px solid var(--frame-ink);
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 var(--frame-ink);
+  transform: rotate(-6deg);
+}
+
+.reveal .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.reveal .cols-2 > * > :first-child { margin-top: 0; }
+
+.reveal .small { font-size: 0.75em; }
+
+.reveal .tint-olive, .reveal .tint-sage, .reveal .tint-salmon, .reveal .tint-peach,
+.reveal .tint-lime, .reveal .tint-sky, .reveal .tint-steel, .reveal .tint-periwinkle { background-color: var(--tint); }
+.reveal .ribbon[class*='tint-'] { background-color: transparent; }
+
+/* ─── Diagramas e infografías ─── */
+.reveal .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+.reveal .lead { font-size: 34px; line-height: 1.3; }
+.reveal .muted { color: #444; }
+
+/* Flujo horizontal: cajas unidas por flechas. */
+.reveal .flow { display: flex; align-items: stretch; margin: 28px 0; }
+.reveal .flow .node {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 12px;
+  border: 2px solid var(--frame-ink);
+  background: var(--tint, var(--canvas));
+  box-shadow: 4px 4px 0 var(--frame-ink);
+  font-size: 20px;
+  line-height: 1.25;
+  text-align: center;
+}
+.reveal .flow .node b {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-ui);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.reveal .flow .arrow { position: relative; flex: 0 0 34px; align-self: center; height: 4px; margin: 0 10px 0 4px; background: var(--frame-ink); }
+.reveal .flow .arrow::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  border: 10px solid transparent;
+  border-left: 12px solid var(--frame-ink);
+  border-right: 0;
+}
+.reveal .flow .arrow.both::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -10px;
+  border: 10px solid transparent;
+  border-right: 12px solid var(--frame-ink);
+  border-left: 0;
+}
+.reveal .flow.compact .node { padding: 10px 8px; font-size: 18px; }
+
+/* Pila de capas: etiqueta a la izquierda, detalle a la derecha. */
+.reveal .layers { margin: 20px 0; border: 2px solid var(--frame-ink); box-shadow: 6px 6px 0 var(--frame-ink); }
+.reveal .layers > div { display: grid; grid-template-columns: 290px 1fr; border-top: 1px solid var(--frame-ink); }
+.reveal .layers > div:first-child { border-top: 0; }
+.reveal .layers > div > b {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-right: 1px solid var(--frame-ink);
+  background: var(--tint, var(--canvas));
+  font-family: var(--font-ui);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.reveal .layers > div > span { padding: 10px 16px; font-size: 22px; line-height: 1.3; }
+
+/* Direcciones en binario: parte de red y parte de host. */
+.reveal .bits { display: inline-block; font-family: var(--font-mono); font-size: 26px; font-weight: 700; letter-spacing: 1px; background: none; padding: 0; }
+.reveal .bits .net { background: var(--tint-periwinkle); padding: 2px 4px; }
+.reveal .bits .host { background: var(--tint-peach); padding: 2px 4px; }
+.reveal .legend { display: inline-flex; align-items: center; gap: 8px; margin-right: 24px; font-family: var(--font-ui); font-size: 18px; font-weight: 700; text-transform: uppercase; }
+.reveal .legend i { display: inline-block; width: 22px; height: 22px; border: 1px solid var(--frame-ink); background: var(--tint); }
+
+/* Figura con fuente. */
+.reveal figure { margin: 12px 0; text-align: center; }
+.reveal figure img { max-height: 400px; background: var(--canvas); }
+.reveal figcaption, .reveal .fuente { margin-top: 10px; font-family: var(--font-ui); font-size: 14px; line-height: 1.3; color: #333; text-align: left; }
+.reveal figure figcaption { text-align: center; }
+
+/* Pasos numerados con cuadros negros. */
+.reveal ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+.reveal ol.steps > li { position: relative; margin: 10px 0; padding-left: 52px; counter-increment: paso; line-height: 1.3; }
+.reveal ol.steps > li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--frame-ink);
+  color: var(--canvas);
+  font: 900 20px/36px var(--font-display);
+  text-align: center;
+}
+
+/* Tarjetas pequeñas para ejemplos y comparaciones. */
+.reveal .card { border: 2px solid var(--frame-ink); background: var(--tint, var(--canvas)); box-shadow: 4px 4px 0 var(--frame-ink); padding: 14px 16px; font-size: 22px; line-height: 1.3; }
+.reveal .card > b:first-child { display: block; margin-bottom: 6px; font-family: var(--font-ui); font-size: 20px; text-transform: uppercase; }
+.reveal .card p { margin: 6px 0 0; }
+
+/* Operadores entre cajas de un flujo (+, =). */
+.reveal .flow .op { align-self: center; padding: 0 16px; font: 900 44px/1 var(--font-display); }
+
+/* Barra transversal (p. ej. seguridad en todas las capas). */
+.reveal .bar {
+  margin-top: 14px;
+  padding: 10px 16px;
+  background: var(--frame-ink);
+  color: var(--canvas);
+  font: 700 18px/1.2 var(--font-ui);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Modelo de referencia: capas + columnas verticales transversales. */
+.reveal .ref-model { display: grid; grid-template-columns: 1fr 72px 72px; gap: 12px; align-items: stretch; margin: 16px 0; }
+.reveal .ref-model .layers { margin: 0; }
+.reveal .vbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--frame-ink);
+  background: var(--tint, var(--canvas));
+  box-shadow: 4px 4px 0 var(--frame-ink);
+  font: 700 18px/1 var(--font-ui);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Comparación OSI / TCP-IP: tres columnas con filas alineadas. */
+.reveal .osi { display: grid; grid-template-columns: 1fr 1fr 1.25fr; grid-auto-rows: 50px; gap: 6px 16px; margin: 12px 0; font-size: 20px; }
+.reveal .osi .h { align-self: end; font: 700 16px/1.1 var(--font-ui); text-transform: uppercase; }
+.reveal .osi .o, .reveal .osi .t {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border: 2px solid var(--frame-ink);
+  background: var(--tint, var(--canvas));
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+.reveal .osi .t { justify-content: center; box-shadow: 4px 4px 0 var(--frame-ink); text-transform: uppercase; }
+.reveal .osi .p { display: flex; align-items: center; font-size: 20px; border-bottom: 1px dashed var(--frame-ink); }
+
+.reveal .ribbon > ul:not(:first-child), .reveal .ribbon > ol:not(:first-child) { padding-left: 46px; }
+
+/* Diagramas SVG en línea. */
+.reveal svg.diagram { display: block; width: 100%; height: auto; margin: 8px auto; overflow: visible; }
+.reveal svg.diagram text { font-family: var(--font-ui); }
+.reveal svg.diagram .mono { font-family: var(--font-mono); }
+
+/* ─── Portada y separadores ─── */
+.reveal .slides section.portada,
+.reveal .slides section.divider {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.reveal section.portada .eyebrow-block {
+  margin: 0 calc(-1 * var(--slide-pad-x));
+  padding: 40px var(--slide-pad-x);
+  background: var(--tint);
+  border-top: 1px solid var(--frame-ink);
+  border-bottom: 1px solid var(--frame-ink);
+}
+.reveal section.portada .kicker { margin: 0 0 14px; font-family: var(--font-ui); font-size: 20px; font-weight: 700; text-transform: uppercase; }
+.reveal section.portada h1 { margin: 0; font-size: 64px; border: 0; padding: 0; }
+.reveal section.portada .subtitulo { margin: 16px 0 0; font-size: 30px; }
+.reveal section.portada .firma { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 32px; font-size: 24px; }
+.reveal section.portada .codigo { color: var(--primary); font-family: var(--font-ui); font-weight: 700; font-size: 26px; }
+
+.reveal .slides section.divider { background: var(--tint); }
+.reveal section.divider h1, .reveal section.divider h2 { font-size: 72px; border: 0; }
+
+/* ─── Controles de reveal ─── */
+.reveal .controls { color: var(--yellow-sticker); }
+.reveal .progress { color: var(--primary); height: 6px; }
+.reveal .slide-number {
+  right: 14px;
+  bottom: 14px;
+  background: var(--yellow-sticker);
+  color: var(--ink);
+  border: 1px solid var(--frame-ink);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 8px;
+}
+.reveal .slide-number a { color: var(--ink); text-decoration: none; }
+
+.deck-back {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 40;
+  padding: 6px 12px;
+  background: var(--yellow-sticker);
+  color: var(--ink);
+  border: 1px solid var(--frame-ink);
+  box-shadow: 2px 2px 0 var(--frame-ink);
+  font: 700 12px/1 var(--font-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.85;
+}
+.deck-back:hover, .deck-back:focus-visible { opacity: 1; }
+html.print-pdf .deck-back { display: none; }
+
+/* ─── PDF (?print-pdf): reveal fuerza padding 0 y posiciona cada sección; se restaura la página completa. ─── */
+html.reveal-print .reveal .slides section:not(.stack) {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: calc(var(--strip-h) + 36px) var(--slide-pad-x) calc(var(--foot-h) + 24px) !important;
+}
+html.reveal-print .reveal .slides section.portada,
+html.reveal-print .reveal .slides section.divider { display: flex !important; }
+html.reveal-print .reveal .slide-number-pdf {
+  right: 16px;
+  bottom: 6px;
+  z-index: 2;
+  background: var(--yellow-sticker);
+  border: 1px solid var(--frame-ink);
+  padding: 2px 8px;
+  font: 700 14px/1.2 var(--font-ui);
+}

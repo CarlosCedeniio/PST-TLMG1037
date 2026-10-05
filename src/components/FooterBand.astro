@@ -1,0 +1,59 @@
+---
+import { getCurso, url } from '../lib/curso';
+const curso = await getCurso();
+const year = new Date().getFullYear();
+
+const iconos = [
+  { href: url(), label: 'Inicio', d: 'M3 12 12 4l9 8M6 10v10h5v-6h2v6h5V10' },
+  { href: url('cronograma'), label: 'Cronograma', d: 'M4 6h16v14H4zM4 10h16M8 3v5M16 3v5' },
+  { href: url('recursos'), label: 'Recursos', d: 'M4 5h7v15H4zM13 5h7v15h-7zM6 9h3M15 9h3' },
+  { href: url('unidades'), label: 'Unidades', d: 'M4 8l8-4 8 4-8 4zM4 12.5l8 4 8-4M4 17l8 4 8-4' },
+];
+---
+<footer class="footer-band">
+  <ul class="icon-nav">
+    {iconos.map((i) => (
+      <li>
+        <a href={i.href}>
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d={i.d} /></svg>
+          <span class="ui-label">{i.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="small">
+    <a href={url()}>Copyright</a> © {year} {curso.docente.nombre} · {curso.nombre} ({curso.codigo}) · {curso.institucion}
+  </p>
+  <p class="caption">Este sitio se ve mejor con cualquier navegador de 1996 en adelante.</p>
+</footer>
+
+<style>
+  .footer-band { border-top: var(--hairline); padding: var(--sp-lg); text-align: center; }
+  .icon-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 520px;
+    margin: 0 auto var(--sp-md);
+    padding: 0;
+    list-style: none;
+    background: linear-gradient(var(--tint-olive), var(--tint-olive)) center 22px / 75% 2px no-repeat;
+  }
+  .icon-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-xs);
+    min-height: 44px;
+    padding: var(--sp-sm);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  svg {
+    background: var(--canvas);
+    fill: var(--yellow-sticker);
+    stroke: var(--ink);
+    stroke-width: 1.8;
+    stroke-linejoin: miter;
+  }
+  p { margin: var(--sp-xs) 0; }
+</style>

@@ -1,0 +1,4 @@
+# Fechas puntuales: feriados, exámenes, entregas y eventos.
+# tipo: feriado | examen | entrega | evento
+# Las evaluaciones con fecha viven en src/content/evaluaciones/ y aparecen solas en el cronograma.
+- { id: feriado-noviembre, fecha: 2026-11-02, tipo: feriado, titulo: Feriado (sin clase) }

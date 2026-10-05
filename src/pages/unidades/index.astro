@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
+import RibbonCard from '../../components/RibbonCard.astro';
+import { getUnidades, getTemas, url, rutaTema, esNuevo } from '../../lib/curso';
+
+const [unidades, temas] = await Promise.all([getUnidades(), getTemas()]);
+---
+<Base titulo="Unidades">
+  <SectionEyebrow titulo="Unidades" color="sage" kicker={`${unidades.length} unidades · ${temas.length} temas`} />
+  <div class="list">
+    {unidades.map((m) => {
+      const ts = temas.filter((t) => t.unidad.id === m.id);
+      return (
+        <RibbonCard
+          titulo={`Unidad ${m.numero} · ${m.titulo}`}
+          href={url(`unidades/${m.id}`)}
+          color={m.color}
+          notch={`U${m.numero}`}
+          notchLabel={`${ts.length} temas`}
+          nuevo={ts.some((t) => esNuevo(t.slides?.data.publicado))}
+        >
+          <p>{m.descripcion}</p>
+          <ul>{ts.map((t) => <li><a href={rutaTema(t)}>{t.numero} {t.titulo}</a></li>)}</ul>
+        </RibbonCard>
+      );
+    })}
+  </div>
+</Base>
+
+<style>
+  .list { display: grid; gap: var(--sp-xxl); margin-top: var(--sp-section-sm); }
+  .list :global(.ribbon + .ribbon) { margin-top: 0; }
+</style>

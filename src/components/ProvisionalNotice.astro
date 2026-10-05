@@ -1,0 +1,22 @@
+---
+import { getCurso } from '../lib/curso';
+const curso = await getCurso();
+---
+{curso.provisional && (
+  <p class="provisional ui-label">
+    <span class="sticker">¡Ojo!</span> Planificación provisional: temas y fechas pueden cambiar.
+  </p>
+)}
+
+<style>
+  .provisional {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-md);
+    margin: 0;
+    padding: var(--sp-sm) var(--sp-lg);
+    border-bottom: var(--hairline);
+    background: var(--tint-lime);
+    line-height: 1.3;
+  }
+</style>

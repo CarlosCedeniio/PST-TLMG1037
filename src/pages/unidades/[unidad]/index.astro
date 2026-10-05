@@ -1,0 +1,46 @@
+---
+import Base from '../../../layouts/Base.astro';
+import SectionEyebrow from '../../../components/SectionEyebrow.astro';
+import RibbonCard from '../../../components/RibbonCard.astro';
+import { getUnidades, getTemas, rutaTema, rutaSlides, esNuevo, dictado, type Unidad } from '../../../lib/curso';
+
+export async function getStaticPaths() {
+  const unidades = await getUnidades();
+  return unidades.map((unidad) => ({ params: { unidad: unidad.id }, props: { unidad } }));
+}
+
+const { unidad } = Astro.props as { unidad: Unidad };
+const temas = (await getTemas()).filter((t) => t.unidad.id === unidad.id);
+const kicker = [`Unidad ${unidad.numero}`, unidad.horas && `${unidad.horas} horas`].filter(Boolean).join(' · ');
+---
+<Base titulo={`Unidad ${unidad.numero}: ${unidad.titulo}`} descripcion={unidad.descripcion}>
+  <SectionEyebrow titulo={unidad.titulo} color={unidad.color} kicker={kicker}>
+    <p>{unidad.descripcion}</p>
+  </SectionEyebrow>
+
+  <div class="list">
+    {temas.map((t) => (
+      <RibbonCard
+        titulo={`${t.numero} ${t.titulo}`}
+        href={rutaTema(t)}
+        color={unidad.color}
+        notch={t.numero}
+        nuevo={esNuevo(t.slides?.data.publicado)}
+        sello={dictado(t) ? 'Tema<br>dictado' : undefined}
+      >
+        {t.resumen && <p>{t.resumen}</p>}
+        {t.contenidos.length > 0 && <ul>{t.contenidos.map((c) => <li>{c}</li>)}</ul>}
+        {t.objetivos.length > 0 && <ul>{t.objetivos.map((o) => <li>{o}</li>)}</ul>}
+        <div class="btn-row">
+          <a class="btn btn--secondary" href={rutaTema(t)}>Ver tema</a>
+          {t.slides && <a class="btn" href={rutaSlides(t)}>Diapositivas</a>}
+        </div>
+      </RibbonCard>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .list { display: grid; gap: var(--sp-xxl); margin-top: var(--sp-section-sm); }
+  .list :global(.ribbon + .ribbon) { margin-top: 0; }
+</style>

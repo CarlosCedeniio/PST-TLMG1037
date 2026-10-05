@@ -1,0 +1,45 @@
+---
+import { getCurso, url } from '../lib/curso';
+const curso = await getCurso();
+---
+<header class="top-banner">
+  <a class="top-banner__brand" href={url()}>
+    <span class="top-banner__sigla">{curso.sigla}</span>
+    <span>
+      <span class="h2 top-banner__title">{curso.nombre}</span>
+      <span class="top-banner__sub">{curso.institucion} · {curso.periodo} · {curso.docente.nombre}</span>
+    </span>
+  </a>
+</header>
+
+<style>
+  .top-banner {
+    display: flex;
+    align-items: center;
+    background: var(--frame-ink);
+    color: var(--canvas);
+    padding: var(--sp-md) var(--sp-lg);
+  }
+  .top-banner__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-md);
+    color: var(--canvas);
+    text-decoration: none;
+    min-width: 0;
+  }
+  .top-banner__sigla {
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 900;
+    line-height: 1;
+    padding-right: var(--sp-md);
+    border-right: 2px solid var(--canvas);
+  }
+  .top-banner__title { display: block; text-transform: uppercase; }
+  .top-banner__sub { display: block; font-size: var(--fs-body-sm); margin-top: var(--sp-xxs); }
+  @media (max-width: 480px) {
+    .top-banner__sigla { font-size: 26px; }
+    .top-banner__title { font-size: var(--fs-h3); }
+  }
+</style>

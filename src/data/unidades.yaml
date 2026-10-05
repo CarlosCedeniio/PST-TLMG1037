@@ -1,0 +1,235 @@
+# Planificación teórica: unidades → temas (subunidades) → semana.
+# Fuente: planning/Sistemas_Telematicos_Propuesta_Redisenio.pdf, secciones 5 y 7.
+# color: olive | sage | salmon | peach | lime | sky | steel | periwinkle
+# Las diapositivas de cada tema van en src/content/slides/<id-unidad>/<id-tema>.md
+# El número del tema (1.1, 1.2…) se calcula por su orden dentro de la unidad.
+
+- id: redes
+  numero: 1
+  titulo: Redes para sistemas conectados
+  color: periwinkle
+  horas: 6
+  descripcion: >-
+    Da los fundamentos de redes para entender cómo un dispositivo se comunica con un servidor.
+    Prepara la base conceptual para construir la aplicación en la Unidad 2.
+  temas:
+    - id: arquitectura-end-to-end
+      titulo: Sistemas telemáticos y arquitectura end-to-end
+      semana: 2
+      resumen: >-
+        Presenta qué es un sistema telemático y sus capas: dispositivo, red, servidor, datos y
+        aplicación. Los equipos definen el problema real que resolverá su proyecto.
+      objetivos:
+        - Definir qué es un sistema telemático y reconocerlo en aplicaciones reales.
+        - Describir las cinco capas de una arquitectura end-to-end y la función de cada una.
+        - Seguir el recorrido de una lectura desde el sensor hasta la aplicación, y el de un comando en sentido contrario.
+        - Plantear el problema real que resolverá el proyecto del equipo.
+    - id: tcp-ip-direccionamiento
+      titulo: "Modelo TCP/IP y direccionamiento: IP, máscara, gateway, DHCP"
+      semana: 2
+      resumen: >-
+        Explica cómo se organiza una red y cómo un dispositivo obtiene su dirección. El estudiante
+        debe poder diagnosticar por qué un equipo no tiene conexión.
+      objetivos:
+        - Explicar por qué las redes se organizan en capas y comparar los modelos OSI y TCP/IP.
+        - "Interpretar una dirección IPv4 con su máscara: red, broadcast y rango de hosts."
+        - Explicar la función del gateway predeterminado y del protocolo DHCP.
+        - Diagnosticar, a partir de la configuración IP, por qué un equipo no tiene conexión.
+    - id: dns-puertos-nat
+      titulo: "Servicios de red: DNS, puertos y NAT"
+      semana: 3
+      resumen: >-
+        Cubre cómo se resuelven nombres, cómo los puertos identifican servicios y por qué un
+        dispositivo en una red local no es accesible desde internet. Es la base para entender
+        despliegue y conectividad remota.
+    - id: http-json
+      titulo: "Protocolo HTTP: métodos, códigos de estado y JSON"
+      semana: 3
+      resumen: >-
+        Enseña la estructura de peticiones y respuestas HTTP y el formato JSON para intercambiar
+        datos.
+    - id: seguridad-red
+      titulo: "Seguridad: exposición de puertos y riesgos de red"
+      semana: 3
+      resumen: >-
+        Muestra los riesgos de exponer dispositivos y servicios a internet sin protección, junto
+        con buenas prácticas básicas de configuración de red.
+
+- id: web-apis
+  numero: 2
+  titulo: Desarrollo web y APIs REST
+  color: salmon
+  horas: 7
+  descripcion: >-
+    Construye la capa de aplicación del proyecto (backend, frontend y persistencia básica) usando
+    IA como herramienta de desarrollo. Cierra con un prototipo desplegado en internet.
+  temas:
+    - id: desarrollo-con-ia
+      titulo: "Desarrollo asistido por IA: flujo de trabajo y reglas de uso"
+      semana: 4
+      resumen: >-
+        Enseña a usar asistentes de IA para generar, revisar y depurar código. Establece las reglas
+        del curso: documentar el uso de IA y poder explicar cada línea entregada.
+    - id: diseno-apis-rest
+      titulo: "Diseño de APIs REST: recursos, endpoints y respuestas"
+      semana: 4
+      resumen: >-
+        Explica cómo diseñar una API clara: qué recursos expone, qué endpoints tiene y qué
+        respuestas devuelve. Cada equipo diseña la API de su proyecto antes de programarla.
+    - id: backend
+      titulo: Desarrollo de backend (FastAPI o Express)
+      semana: 4
+      resumen: >-
+        Implementa la API diseñada con un framework moderno. El estudiante debe poder recibir datos
+        del ESP32 y enviarle comandos.
+    - id: sqlite
+      titulo: Persistencia básica con SQLite y SQL fundamental
+      semana: 5
+      resumen: >-
+        Introduce las bases de datos relacionales con operaciones básicas de SQL para guardar y
+        consultar lecturas. Es una base sencilla que se amplía en la Unidad 4.
+    - id: frontend
+      titulo: "Frontend: HTML, CSS, JavaScript y consumo de APIs"
+      semana: 5
+      resumen: >-
+        Enseña a construir una interfaz web que consulta la API y muestra datos del dispositivo. El
+        foco está en entender cómo el frontend se comunica con el backend.
+    - id: responsive-movil
+      titulo: Diseño responsive y control móvil
+      semana: 5
+      resumen: Adapta la interfaz para usarse desde el celular y controlar actuadores de forma remota.
+    - id: despliegue-rapido
+      titulo: Herramientas de despliegue rápido
+      semana: 7
+      resumen: >-
+        Presenta plataformas que permiten publicar un proyecto en internet en minutos, organizadas
+        según el problema que resuelven. El estudiante debe saber elegir la adecuada para su
+        proyecto.
+      contenidos:
+        - "Backend como servicio: Firebase, Supabase y Appwrite"
+        - "Hosting de frontend: Vercel, Netlify y Cloudflare Pages"
+        - "Hosting de backend: Railway, Render y Fly.io"
+        - "Plataformas IoT listas: Adafruit IO, ThingSpeak y Blynk"
+        - "Constructores de apps con IA: Lovable, Bolt y Replit"
+    - id: seguridad-api
+      titulo: "Seguridad: autenticación con tokens y variables de entorno"
+      semana: 7
+      resumen: >-
+        Enseña a proteger la API para que solo usuarios y dispositivos autorizados accedan a ella,
+        y a manejar credenciales fuera del código fuente.
+
+- id: conectividad
+  numero: 3
+  titulo: Conectividad inalámbrica y telemetría
+  color: sage
+  horas: 8
+  descripcion: >-
+    Amplía las opciones de conexión del dispositivo más allá del Wi-Fi e introduce MQTT como
+    protocolo de telemetría. El objetivo es que el estudiante elija la tecnología adecuada según
+    las condiciones reales de su proyecto.
+  temas:
+    - id: criterios-conectividad
+      titulo: "Criterios de selección de conectividad: alcance, consumo, ancho de banda y costo"
+      semana: 8
+      resumen: >-
+        Establece los criterios para comparar tecnologías inalámbricas. El estudiante debe
+        justificar técnicamente qué conectividad usa su proyecto.
+    - id: wifi-ble
+      titulo: "Tecnologías de corto alcance: Wi-Fi y Bluetooth Low Energy"
+      semana: 8
+      resumen: Compara Wi-Fi y BLE en consumo, alcance y casos de uso típicos.
+    - id: lpwan
+      titulo: "Redes LPWAN: LoRa, LoRaWAN, NB-IoT y Sigfox"
+      semana: 9
+      resumen: >-
+        Presenta las redes de largo alcance y bajo consumo para aplicaciones en campo, donde no hay
+        Wi-Fi. Destaca sus limitaciones: poco ancho de banda y mensajes pequeños.
+    - id: lorawan
+      titulo: "Arquitectura LoRaWAN: nodos, gateways, servidor de red y The Things Network"
+      semana: 9
+      resumen: Explica cómo viaja un dato desde un nodo LoRa hasta internet.
+    - id: celular-iot
+      titulo: "Conectividad celular para IoT: LTE-M y 4G"
+      semana: 9
+      resumen: >-
+        Cubre el uso de redes móviles para dispositivos que necesitan cobertura amplia y mayor
+        ancho de banda, junto con sus costos operativos.
+    - id: pub-sub
+      titulo: Limitaciones del polling y modelo publicador/suscriptor
+      semana: 10
+      resumen: >-
+        Muestra por qué consultar constantemente al servidor es ineficiente y cómo el modelo
+        pub/sub resuelve ese problema. Prepara la migración del proyecto a MQTT.
+    - id: broker-mqtt
+      titulo: "Broker MQTT: tópicos, wildcards y QoS"
+      semana: 10
+      resumen: >-
+        Enseña el funcionamiento de un broker, cómo organizar tópicos y qué garantiza cada nivel de
+        QoS. Cada equipo diseña la jerarquía de tópicos de su proyecto.
+    - id: integracion-mqtt
+      titulo: Integración de MQTT con backend, actuadores y redes LoRaWAN
+      semana: 11
+      resumen: >-
+        Conecta MQTT con el backend de la Unidad 2 para guardar datos y enviar comandos a los
+        actuadores. Muestra cómo TTN entrega datos LoRaWAN por MQTT, lo que unifica ambas
+        arquitecturas.
+    - id: seguridad-mqtt
+      titulo: "Seguridad: autenticación y TLS en el broker"
+      semana: 11
+      resumen: >-
+        Enseña a proteger el broker con usuario, contraseña y cifrado TLS para evitar que terceros
+        lean o envíen mensajes.
+
+- id: datos
+  numero: 4
+  titulo: Datos, integración y despliegue
+  color: sky
+  horas: 7
+  descripcion: >-
+    Da criterio para elegir el tipo de base de datos según el problema, con énfasis en las
+    relacionales como opción por defecto. Cierra con el proyecto desplegado en infraestructura
+    propia.
+  temas:
+    - id: panorama-bd
+      titulo: Panorama de bases de datos y criterios de selección
+      semana: 12
+      resumen: >-
+        Presenta los grandes tipos de bases de datos y los criterios para elegir entre ellos:
+        estructura de los datos, patrones de consulta, consistencia y escalabilidad. El estudiante
+        debe poder justificar la elección para su proyecto.
+    - id: postgresql
+      titulo: "Bases de datos relacionales: PostgreSQL"
+      semana: 12
+      resumen: >-
+        Profundiza en tablas, claves, relaciones, consultas con JOIN y transacciones. Enfatiza por
+        qué suelen ser la opción por defecto cuando los datos tienen estructura y relaciones claras.
+    - id: documentales
+      titulo: "Bases de datos documentales: MongoDB y Firestore"
+      semana: 12
+      resumen: >-
+        Explica el modelo de documentos flexibles y cuándo conviene frente a un esquema rígido, por
+        ejemplo con datos de estructura variable entre dispositivos.
+    - id: redis
+      titulo: "Bases de datos clave-valor: Redis"
+      semana: 13
+      resumen: >-
+        Presenta el almacenamiento clave-valor para accesos muy rápidos, como el último estado de
+        cada dispositivo o una caché. Se muestra como complemento de otra base, no como reemplazo.
+    - id: grafos
+      titulo: "Bases de datos de grafos: Neo4j"
+      semana: 13
+      resumen: >-
+        Introduce el modelo de nodos y relaciones para datos muy conectados, como redes de
+        dispositivos o dependencias entre componentes.
+    - id: series-de-tiempo
+      titulo: "Bases de datos de series de tiempo: InfluxDB y Grafana"
+      semana: 13
+      resumen: >-
+        Explica por qué la telemetría se guarda mejor en bases de series de tiempo, cómo
+        consultarla por ventanas y cómo visualizarla en dashboards de Grafana.
+    - id: docker-despliegue
+      titulo: Docker y despliegue propio en servidor o nube
+      semana: 15
+      resumen: >-
+        Enseña a empaquetar el sistema completo en contenedores y desplegarlo en un servidor
+        propio. Se contrasta con las plataformas de la 2.7: más trabajo, pero control total.

@@ -1,0 +1,71 @@
+# Información general del curso. Un solo registro con id "info".
+# Fuente: planning/Sistemas_Telematicos_Propuesta_Redisenio.pdf (solo la parte teórica).
+# Las fechas van en formato AAAA-MM-DD.
+info:
+  nombre: Programación de Sistemas Telemáticos
+  sigla: PST
+  codigo: TLMG1037
+  institucion: ESPOL
+  carrera: Mecatrónica
+  periodo: 2026 PAO II
+  # true muestra en todo el sitio el aviso "planificación provisional".
+  provisional: false
+  # Lunes de la semana 1. Las semanas se calculan a partir de aquí (semana 2 = 5 oct).
+  inicio: 2026-09-28
+  semanas: 18
+  # Semanas sin clase regular (número de semana → texto).
+  semanas_especiales:
+    "1": Inicio del término (la clase teórica empieza en la semana 2)
+    "6": Feriado
+    "14": Vacaciones
+    "16": Segunda evaluación
+    "18": Tercera evaluación (mejoramiento)
+  docente:
+    nombre: MSc. Carlos Cedeño
+  horario:
+    - { dia: Lunes, hora: "09:00 a 11:00" }
+  resumen: >-
+    Bases de redes, software y conectividad para desarrollar sistemas telemáticos end-to-end,
+    construidas alrededor de un proyecto real.
+  descripcion: >-
+    Esta asignatura de formación profesional teórico-práctica de nivel intermedio brinda al
+    estudiante de Mecatrónica las bases de redes, software y conectividad necesarias para
+    desarrollar sistemas telemáticos end-to-end. Se abordan los fundamentos de redes y protocolos
+    de comunicación, el desarrollo de aplicaciones web y APIs para el monitoreo y control remoto,
+    las tecnologías de conectividad inalámbrica de corto y largo alcance, los protocolos de
+    telemetría, los distintos modelos de bases de datos y el despliegue de sistemas en la nube.
+    La asignatura se desarrolla en torno a un proyecto orientado a un problema real, incorpora el
+    uso responsable de herramientas de desarrollo asistido por inteligencia artificial y hace
+    énfasis transversal en la seguridad de la información.
+  objetivos:
+    - Aplicar los fundamentos de redes TCP/IP y del protocolo HTTP para la interconexión de dispositivos con servicios remotos.
+    - Desarrollar aplicaciones web y APIs para el monitoreo y control remoto de sistemas mecatrónicos, utilizando herramientas de desarrollo asistido por IA y plataformas de despliegue.
+    - Seleccionar tecnologías de conectividad inalámbrica y protocolos de telemetría según los requerimientos de alcance, consumo, ancho de banda y costo de cada aplicación.
+    - Implementar modelos de almacenamiento de datos adecuados para telemetría y aplicaciones, y desplegar el sistema completo aplicando prácticas de seguridad.
+  resultados:
+    - Habilidad para adquirir y aplicar nuevos conocimientos de Ingeniería en Mecatrónica según sean necesarios, usando estrategias apropiadas de aprendizaje.
+    - Diseñar soluciones reales de Ingeniería en Mecatrónica que proponen valor único como respuesta a necesidades específicas consideradas desde el punto de vista de los involucrados.
+  ejes:
+    - { titulo: Proyecto real, texto: Los equipos definen su problema al inicio del término y lo mejoran en cada unidad. }
+    - { titulo: Desarrollo asistido por IA, texto: Se usa desde la Unidad 2. Toda entrega exige documentar el uso de IA y poder explicar cada línea del código. }
+    - { titulo: Seguridad, texto: Las unidades 1 a 3 cierran con una subunidad de seguridad aplicada al proyecto. }
+  horas_evaluacion: 4
+  metodos_evaluacion:
+    - Proyectos
+    - Exámenes
+    - Lecciones
+    - Tareas
+    - Participación
+    - Defensa oral del código del proyecto
+  ponderaciones: []
+  politicas:
+    - Toda entrega exige documentar el uso de herramientas de IA.
+    - Cada estudiante debe poder explicar cada línea del código que entrega; el proyecto incluye una defensa oral del código.
+  bibliografia:
+    obligatoria:
+      - "Kurose, J., Ross, K. *Computer Networking: A Top-Down Approach* (8.ª edición)."
+      - "Hanes, D., Salgueiro, G., Grossetete, P., Barton, R., Henry, J. *IoT Fundamentals: Networking Technologies, Protocols, and Use Cases for the Internet of Things* (1.ª edición)."
+    adicional:
+      - "Guinard, D., Trifa, V. *Building the Web of Things* (1.ª edición)."
+      - "Lea, P. *IoT and Edge Computing for Architects* (2.ª edición)."
+      - "Kleppmann, M. *Designing Data-Intensive Applications* (1.ª edición)."

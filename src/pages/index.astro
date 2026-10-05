@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import RibbonCard from '../components/RibbonCard.astro';
+import SemanaActual from '../components/SemanaActual.astro';
+import {
+  getCurso, getUnidades, getSemanas, getTemas, getEvaluaciones,
+  url, iso, fecha, rangoSemana, dentroDe, rutaTema, rutaSlides, esNuevo,
+} from '../lib/curso';
+
+const [curso, unidades, semanas, temas, evaluaciones] = await Promise.all([
+  getCurso(), getUnidades(), getSemanas(), getTemas(), getEvaluaciones(),
+]);
+
+const accesos = [
+  { href: url('cronograma'), label: 'Cronograma', tint: 'sky' },
+  { href: url('unidades'), label: 'Unidades', tint: 'sage' },
+  { href: url('evaluaciones'), label: 'Evaluaciones', tint: 'salmon' },
+  { href: url('recursos'), label: 'Recursos', tint: 'lime' },
+  { href: url('slides'), label: 'Diapositivas', tint: 'peach' },
+];
+
+const DIA = 86400000;
+const porSemana = semanas.map((s) => ({
+  semana: s,
+  temas: temas.filter((t) => t.semana === s.numero),
+  // Si la semana no tiene clase, se anuncia la siguiente que sí tenga.
+  proxima: (() => {
+    const sig = temas.find((t) => t.semana > s.numero)?.semana;
+    return temas.filter((t) => t.semana === sig);
+  })(),
+  entregas: evaluaciones.filter((e) => e.data.entrega.getTime() >= s.inicio.getTime() && e.data.entrega.getTime() <= s.fin.getTime() + 7 * DIA),
+}));
+---
+<Base>
+  <div class="split">
+    <aside class="rail">
+      <ul class="quick-grid">
+        {accesos.map((a) => (
+          <li class={`tint-${a.tint}`}><a class="ui-label" href={a.href}>{a.label}</a></li>
+        ))}
+      </ul>
+
+      <section class="cta-red esta-semana" aria-labelledby="esta-semana">
+        <h2 id="esta-semana" class="h3">Esta semana</h2>
+        {porSemana.map(({ semana, temas, entregas, proxima }) => (
+          <div data-desde={iso(semana.inicio)} data-hasta={iso(semana.fin)} data-solo-actual hidden>
+            <p class="h2">Semana {semana.numero} · {rangoSemana(semana)}</p>
+            {semana.etiqueta && <p><strong>{semana.etiqueta}</strong></p>}
+            {temas.map((t) => (
+              <p>
+                <a href={rutaTema(t)}>{t.numero} {t.titulo}</a>
+                {t.slides && <> · <a href={rutaSlides(t)}>Diapositivas</a></>}
+              </p>
+            ))}
+            {temas.length === 0 && (proxima[0]?.semanaInfo
+              ? <>
+                  <p>Próxima clase: {fecha(proxima[0].semanaInfo.inicio, { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+                  {proxima.map((t) => <p><a href={rutaTema(t)}>{t.numero} {t.titulo}</a></p>)}
+                </>
+              : !semana.etiqueta && <p>Sin clase esta semana.</p>)}
+            {entregas.length > 0 && (
+              <p>
+                <strong>Entregas próximas:</strong><br />
+                {entregas.map((e) => <><a href={url(`evaluaciones/${e.id}`)}>{e.data.titulo}</a> ({fecha(e.data.entrega)})<br /></>)}
+              </p>
+            )}
+          </div>
+        ))}
+        <p data-antes hidden>El curso empieza el {fecha(curso.inicio, { weekday: 'long', day: 'numeric', month: 'long' })}. Revisa el <a href={url('cronograma')}>cronograma</a>.</p>
+        <p data-despues hidden>El periodo terminó. ¡Gracias por participar!</p>
+        <noscript><p>Revisa el <a href={url('cronograma')}>cronograma</a>.</p></noscript>
+      </section>
+    </aside>
+
+    <div>
+      <section class="eyebrow tint-olive hero">
+        <p class="ui-label">{curso.institucion} · {curso.periodo}</p>
+        <h1 class="display">{curso.nombre}</h1>
+        <p>{curso.resumen ?? curso.descripcion}</p>
+      </section>
+
+      <div class="modules">
+        {unidades.map((m) => {
+          const ts = temas.filter((t) => t.unidad.id === m.id);
+          const sem = ts.map((t) => t.semana);
+          return (
+            <RibbonCard
+              titulo={`Unidad ${m.numero} · ${m.titulo}`}
+              href={url(`unidades/${m.id}`)}
+              color={m.color}
+              notch={`U${m.numero}`}
+              notchLabel={sem.length ? `Sem ${Math.min(...sem)}–${Math.max(...sem)}` : undefined}
+              nuevo={ts.some((t) => esNuevo(t.slides?.data.publicado))}
+            >
+              <p>{m.descripcion}</p>
+              <ul>
+                {ts.map((t) => <li><a href={rutaTema(t)}>{t.numero} {t.titulo}</a></li>)}
+              </ul>
+            </RibbonCard>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+  <SemanaActual />
+</Base>
+
+<style>
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 0 var(--sp-lg);
+    padding: 0;
+    list-style: none;
+    border-top: var(--hairline);
+    border-left: var(--hairline);
+  }
+  .quick-grid li {
+    background: var(--tint);
+    border-right: var(--hairline);
+    border-bottom: var(--hairline);
+  }
+  .quick-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: var(--sp-sm);
+    color: var(--ink);
+    text-align: center;
+    text-decoration: none;
+  }
+  .quick-grid li:last-child:nth-child(odd) { grid-column: span 2; }
+  .quick-grid a:hover { background: var(--frame-ink); color: var(--canvas); }
+  .esta-semana p { margin: var(--sp-sm) 0 0; }
+  .hero { margin-bottom: var(--sp-section-sm); }
+  .hero .ui-label { margin: 0 0 var(--sp-sm); }
+  .modules { display: grid; gap: var(--sp-xxl); }
+  .modules :global(.ribbon + .ribbon) { margin-top: 0; }
+</style>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Deck from '../../../layouts/Deck.astro';
+import { getTemas, rutaTema, url } from '../../../lib/curso';
+
+export async function getStaticPaths() {
+  const [slides, temas] = await Promise.all([
+    getCollection('slides', (s) => import.meta.env.DEV || !s.data.draft),
+    getTemas(),
+  ]);
+  return slides.map((entry) => {
+    const [unidad, tema] = entry.id.split('/');
+    if (!tema) throw new Error(`Las diapositivas van en src/content/slides/<unidad>/<tema>.md (encontré "${entry.id}")`);
+    return { params: { unidad, tema }, props: { entry, info: temas.find((t) => t.unidad.id === unidad && t.id === tema) } };
+  });
+}
+
+const { entry, info } = Astro.props;
+const { unidad, tema } = Astro.params;
+// Las imágenes van en public/slides/<unidad>/<tema>/ y se enlazan como ./archivo.png
+const carpeta = url(`slides/${unidad}/${tema}/`);
+const markdown = (entry.body ?? '').replace(/(\]\(|src=["'])\.\//g, `$1${carpeta}`);
+const kicker = info ? `Unidad ${info.unidad.numero} · ${info.unidad.titulo} · Semana ${info.semana}` : 'Guía de diapositivas';
+const titulo = info ? `${info.numero} ${entry.data.titulo}` : entry.data.titulo;
+const franja = info ? `U${info.unidad.numero} · ${info.unidad.titulo}   ▸   ${info.numero} ${entry.data.titulo}` : entry.data.titulo;
+---
+<Deck
+  titulo={titulo}
+  subtitulo={entry.data.subtitulo}
+  kicker={kicker}
+  franja={franja}
+  color={info?.unidad.color ?? 'olive'}
+  volver={info ? rutaTema(info) : url('slides')}
+  markdown={markdown}
+/>

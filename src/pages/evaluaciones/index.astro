@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionEyebrow from '../../components/SectionEyebrow.astro';
+import RibbonCard from '../../components/RibbonCard.astro';
+import { getEvaluaciones, getUnidades, url, fecha, esNuevo } from '../../lib/curso';
+
+const [evaluaciones, unidades] = await Promise.all([getEvaluaciones(), getUnidades()]);
+const hoy = new Date();
+---
+<Base titulo="Evaluaciones">
+  <SectionEyebrow titulo="Evaluaciones" color="salmon" kicker="Proyectos, talleres, deberes y exámenes">
+    <p>Ordenadas por fecha de entrega. Las que ya vencieron aparecen marcadas.</p>
+  </SectionEyebrow>
+
+  <div class="list">
+    {evaluaciones.length === 0 && <p>Todavía no hay evaluaciones publicadas.</p>}
+    {evaluaciones.map((e) => {
+      const unidad = unidades.find((m) => m.id === e.data.unidad);
+      const vencida = e.data.entrega.getTime() < hoy.getTime();
+      return (
+        <RibbonCard
+          titulo={e.data.titulo}
+          href={url(`evaluaciones/${e.id}`)}
+          color={unidad?.color ?? 'steel'}
+          notch={fecha(e.data.entrega, { day: 'numeric' })}
+          notchLabel={fecha(e.data.entrega, { month: 'short' })}
+          nuevo={esNuevo(e.data.publicado)}
+          sello={vencida ? 'Entrega<br>cerrada' : undefined}
+        >
+          <p class="ui-label">{e.data.tipo}{unidad && ` · Unidad ${unidad.numero}`}{e.data.peso && ` · ${e.data.peso}`}</p>
+          <p>Entrega: {fecha(e.data.entrega, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+        </RibbonCard>
+      );
+    })}
+  </div>
+</Base>
+
+<style>
+  .list { display: grid; gap: var(--sp-xxl); margin-top: var(--sp-section-sm); }
+  .list :global(.ribbon + .ribbon) { margin-top: 0; }
+</style>

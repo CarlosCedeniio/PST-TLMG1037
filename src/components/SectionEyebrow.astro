@@ -1,0 +1,17 @@
+---
+interface Props {
+  titulo: string;
+  color?: string;
+  kicker?: string;
+}
+const { titulo, color = 'olive', kicker } = Astro.props;
+---
+<section class={`eyebrow tint-${color}`}>
+  {kicker && <p class="ui-label kicker">{kicker}</p>}
+  <h1 class="display">{titulo}</h1>
+  <slot />
+</section>
+
+<style>
+  .kicker { margin: 0 0 var(--sp-sm); }
+</style>

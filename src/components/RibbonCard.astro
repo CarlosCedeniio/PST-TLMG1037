@@ -1,0 +1,36 @@
+---
+interface Props {
+  titulo: string;
+  href?: string;
+  color?: string;
+  notch?: string;
+  notchLabel?: string;
+  nuevo?: boolean;
+  sello?: string;
+}
+const { titulo, href, color = 'sage', notch, notchLabel, nuevo = false, sello } = Astro.props;
+---
+<article class={`ribbon tint-${color}`}>
+  <h2 class="ribbon__title">
+    {href ? <a href={href}>{titulo}</a> : <span>{titulo}</span>}
+    <slot name="title-extra" />
+  </h2>
+  <div class="ribbon__body">
+    <div><slot /></div>
+    {(notch || sello) && (
+      <div class="ribbon__side">
+        {sello && <span class="seal seal--sm" set:html={sello} />}
+        {notch && <div class="notch">{notch}{notchLabel && <small>{notchLabel}</small>}</div>}
+      </div>
+    )}
+  </div>
+  {nuevo && <span class="sticker sticker--new new-burst">¡Nuevo!</span>}
+</article>
+
+<style>
+  .ribbon__side { display: flex; align-items: center; gap: var(--sp-md); }
+  .new-burst { position: absolute; top: -10px; right: 96px; }
+  @media (max-width: 480px) {
+    .new-burst { right: var(--sp-md); }
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import TopBanner from '../components/TopBanner.astro';
+import MainNav from '../components/MainNav.astro';
+import FooterBand from '../components/FooterBand.astro';
+import ProvisionalNotice from '../components/ProvisionalNotice.astro';
+import { getCurso, url } from '../lib/curso';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+}
+const curso = await getCurso();
+const { titulo, descripcion = `${curso.nombre} (${curso.codigo}) · ${curso.institucion} · ${curso.periodo}` } = Astro.props;
+const fullTitle = titulo ? `${titulo} · ${curso.sigla} ${curso.periodo}` : `${curso.sigla} · ${curso.nombre}`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="page-frame">
+      <TopBanner />
+      <MainNav />
+      <ProvisionalNotice />
+      <main class="page-body">
+        <slot />
+      </main>
+      <FooterBand />
+    </div>
+  </body>
+</html>
