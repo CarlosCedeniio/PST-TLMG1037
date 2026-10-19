@@ -326,3 +326,201 @@
   unidad: redes
   tema: seguridad-red
   descripcion: "Artículo académico."
+- id: pearce-copilot
+  titulo: "Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions"
+  url: https://arxiv.org/abs/2108.09293
+  tipo: lectura
+  unidad: web-apis
+  tema: desarrollo-con-ia
+  descripcion: "Artículo académico (IEEE S&P 2022)."
+- id: spracklen-paquetes
+  titulo: "We Have a Package for You! Package Hallucinations by Code Generating LLMs"
+  url: https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen
+  tipo: lectura
+  unidad: web-apis
+  tema: desarrollo-con-ia
+  descripcion: "Artículo académico (USENIX Security 2025)."
+- id: github-prompts
+  titulo: "GitHub Docs: Prompt engineering for GitHub Copilot Chat"
+  url: https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering
+  tipo: documentacion
+  unidad: web-apis
+  tema: desarrollo-con-ia
+- id: fielding-rest
+  titulo: "Fielding: Representational State Transfer (tesis, cap. 5)"
+  url: https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+  tipo: lectura
+  unidad: web-apis
+  tema: diseno-apis-rest
+  descripcion: "Origen del estilo REST."
+- id: azure-api-design
+  titulo: "Microsoft: Web API design best practices"
+  url: https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
+  tipo: documentacion
+  unidad: web-apis
+  tema: diseno-apis-rest
+  descripcion: "Guía de diseño."
+- id: rfc9457
+  titulo: "RFC 9457: Problem Details for HTTP APIs"
+  url: https://www.rfc-editor.org/rfc/rfc9457
+  tipo: documentacion
+  unidad: web-apis
+  tema: diseno-apis-rest
+  descripcion: "Estándar del IETF."
+- id: openapi
+  titulo: "OpenAPI Specification 3.2.0"
+  url: https://spec.openapis.org/oas/v3.2.0.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: diseno-apis-rest
+- id: uvicorn
+  titulo: "Uvicorn: Settings"
+  url: https://uvicorn.dev/settings/
+  tipo: documentacion
+  unidad: web-apis
+  tema: backend
+- id: esp32-httpclient
+  titulo: "arduino-esp32: biblioteca HTTPClient"
+  url: https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient
+  tipo: repositorio
+  unidad: web-apis
+  tema: backend
+- id: arduinojson
+  titulo: "ArduinoJson 7"
+  url: https://arduinojson.org/
+  tipo: documentacion
+  unidad: web-apis
+  tema: backend
+- id: sqlite-whentouse
+  titulo: "SQLite: Appropriate Uses For SQLite"
+  url: https://www.sqlite.org/whentouse.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: sqlite
+- id: python-sqlite3
+  titulo: "Python: módulo sqlite3"
+  url: https://docs.python.org/3/library/sqlite3.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: sqlite
+- id: owasp-sqli
+  titulo: "OWASP: SQL Injection Prevention Cheat Sheet"
+  url: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: sqlite
+  descripcion: "Guía de referencia."
+- id: dbbrowser-sqlite
+  titulo: "DB Browser for SQLite"
+  url: https://sqlitebrowser.org/
+  tipo: herramienta
+  unidad: web-apis
+  tema: sqlite
+- id: mdn-fetch
+  titulo: "MDN: Using the Fetch API"
+  url: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+  tipo: documentacion
+  unidad: web-apis
+  tema: frontend
+- id: mdn-cors
+  titulo: "MDN: Cross-Origin Resource Sharing (CORS)"
+  url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
+  tipo: documentacion
+  unidad: web-apis
+  tema: frontend
+- id: chartjs
+  titulo: "Chart.js: documentación"
+  url: https://www.chartjs.org/docs/latest/
+  tipo: documentacion
+  unidad: web-apis
+  tema: frontend
+- id: fastapi-cors
+  titulo: "FastAPI: CORS"
+  url: https://fastapi.tiangolo.com/tutorial/cors/
+  tipo: documentacion
+  unidad: web-apis
+  tema: frontend
+- id: marcotte-rwd
+  titulo: "Marcotte: Responsive Web Design (A List Apart, 2010)"
+  url: https://alistapart.com/article/responsive-web-design/
+  tipo: lectura
+  unidad: web-apis
+  tema: responsive-movil
+  descripcion: "Artículo que dio origen al término."
+- id: wcag-target-size
+  titulo: "W3C: Understanding SC 2.5.8 Target Size (Minimum)"
+  url: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: responsive-movil
+- id: mdn-responsive
+  titulo: "MDN: Responsive design"
+  url: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
+  tipo: documentacion
+  unidad: web-apis
+  tema: responsive-movil
+- id: aws-device-shadow
+  titulo: "AWS IoT: Device Shadow service documents"
+  url: https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-document.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: responsive-movil
+  descripcion: "Patrón de estado deseado y reportado."
+- id: nist-800-145
+  titulo: "NIST SP 800-145: The NIST Definition of Cloud Computing"
+  url: https://doi.org/10.6028/NIST.SP.800-145
+  tipo: documentacion
+  unidad: web-apis
+  tema: despliegue-rapido
+  descripcion: "Definición de IaaS, PaaS y SaaS."
+- id: render-free
+  titulo: "Render: Deploy for Free (límites del plan gratuito)"
+  url: https://render.com/docs/free
+  tipo: documentacion
+  unidad: web-apis
+  tema: despliegue-rapido
+- id: rfc6750
+  titulo: "RFC 6750: Bearer Token Usage"
+  url: https://www.rfc-editor.org/rfc/rfc6750
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api
+  descripcion: "Estándar del IETF."
+- id: rfc7519
+  titulo: "RFC 7519: JSON Web Token (JWT)"
+  url: https://www.rfc-editor.org/rfc/rfc7519
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api
+  descripcion: "Estándar del IETF."
+- id: owasp-api-top10
+  titulo: "OWASP API Security Top 10 (2023)"
+  url: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api
+  descripcion: "Guía de referencia."
+- id: owasp-password
+  titulo: "OWASP: Password Storage Cheat Sheet"
+  url: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api
+- id: fastapi-security
+  titulo: "FastAPI: OAuth2 con contraseña y tokens JWT"
+  url: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api
+- id: twelve-factor-config
+  titulo: "The Twelve-Factor App: III. Config"
+  url: https://12factor.net/config
+  tipo: lectura
+  unidad: web-apis
+  tema: seguridad-api
+- id: github-push-protection
+  titulo: "GitHub Docs: About push protection"
+  url: https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection
+  tipo: documentacion
+  unidad: web-apis
+  tema: seguridad-api

@@ -86,34 +86,68 @@
       resumen: >-
         Enseña a usar asistentes de IA para generar, revisar y depurar código. Establece las reglas
         del curso: documentar el uso de IA y poder explicar cada línea entregada.
+      objetivos:
+        - Distinguir los tipos de asistentes de IA para programar y lo que cada uno puede ver y hacer.
+        - "Aplicar un flujo de trabajo: especificar, pedir una pieza pequeña, leer, probar y registrar."
+        - Escribir prompts con contexto para generar, depurar y explicar código.
+        - Reconocer los riesgos documentados del código generado.
     - id: diseno-apis-rest
       titulo: "Diseño de APIs REST: recursos, endpoints y respuestas"
       semana: 4
       resumen: >-
         Explica cómo diseñar una API clara: qué recursos expone, qué endpoints tiene y qué
         respuestas devuelve. Cada equipo diseña la API de su proyecto antes de programarla.
+      objetivos:
+        - Explicar qué es una API y las restricciones del estilo REST.
+        - Identificar los recursos de un sistema y nombrar sus URI.
+        - Asignar a cada operación el método y los códigos de estado adecuados.
+        - Diseñar respuestas y mensajes de error consistentes.
+        - Elegir cómo un dispositivo recibe comandos por HTTP.
     - id: backend
       titulo: Desarrollo de backend (FastAPI o Express)
       semana: 4
       resumen: >-
         Implementa la API diseñada con un framework moderno. El estudiante debe poder recibir datos
         del ESP32 y enviarle comandos.
+      objetivos:
+        - Explicar qué hace un framework de backend con cada petición.
+        - Implementar endpoints en FastAPI con parámetros de ruta, de consulta y un cuerpo validado.
+        - Probar la API con la documentación automática.
+        - Recibir lecturas del ESP32 y entregarle el estado deseado del actuador.
+        - Diagnosticar errores de conexión entre el ESP32 y el servidor.
     - id: sqlite
       titulo: Persistencia básica con SQLite y SQL fundamental
       semana: 5
       resumen: >-
         Introduce las bases de datos relacionales con operaciones básicas de SQL para guardar y
         consultar lecturas. Es una base sencilla que se amplía en la Unidad 4.
+      objetivos:
+        - Explicar por qué una API necesita persistencia y qué es el modelo relacional.
+        - Describir las características de SQLite y cuándo es apropiada.
+        - Diseñar tablas con claves primarias y foráneas para el proyecto.
+        - Escribir consultas SQL para insertar, filtrar, ordenar y agregar lecturas.
+        - Usar consultas parametrizadas para evitar la inyección SQL.
     - id: frontend
       titulo: "Frontend: HTML, CSS, JavaScript y consumo de APIs"
       semana: 5
       resumen: >-
         Enseña a construir una interfaz web que consulta la API y muestra datos del dispositivo. El
         foco está en entender cómo el frontend se comunica con el backend.
+      objetivos:
+        - Explicar la función de HTML, CSS y JavaScript en una interfaz web.
+        - Describir cómo el navegador construye el DOM y cómo JavaScript lo modifica.
+        - Consultar la API con fetch y manejar sus errores.
+        - Enviar órdenes desde la interfaz y actualizar los datos periódicamente.
+        - Explicar la política de mismo origen y configurar CORS.
     - id: responsive-movil
       titulo: Diseño responsive y control móvil
       semana: 5
       resumen: Adapta la interfaz para usarse desde el celular y controlar actuadores de forma remota.
+      objetivos:
+        - Explicar los principios del diseño responsive.
+        - Adaptar una interfaz al celular con la etiqueta viewport, Grid, Flexbox y media queries.
+        - Dimensionar los controles táctiles según WCAG 2.2 y las guías de cada plataforma.
+        - Diseñar el control remoto de un actuador con estado deseado, estado reportado y retroalimentación.
     - id: despliegue-rapido
       titulo: Herramientas de despliegue rápido
       semana: 7
@@ -127,12 +161,24 @@
         - "Hosting de backend: Railway, Render y Fly.io"
         - "Plataformas IoT listas: Adafruit IO, ThingSpeak y Blynk"
         - "Constructores de apps con IA: Lovable, Bolt y Replit"
+      objetivos:
+        - Explicar qué es desplegar y por qué una URL pública resuelve el problema del NAT.
+        - "Distinguir los modelos de servicio: IaaS, PaaS, BaaS y SaaS."
+        - Clasificar las plataformas de despliegue rápido según el problema que resuelven.
+        - Evaluar los límites de los planes gratuitos frente a los requisitos del proyecto.
+        - Elegir y justificar una plataforma para cada capa del proyecto.
     - id: seguridad-api
       titulo: "Seguridad: autenticación con tokens y variables de entorno"
       semana: 7
       resumen: >-
         Enseña a proteger la API para que solo usuarios y dispositivos autorizados accedan a ella,
         y a manejar credenciales fuera del código fuente.
+      objetivos:
+        - Distinguir autenticación de autorización, y los códigos 401 y 403.
+        - Proteger los endpoints con tokens enviados en el encabezado Authorization.
+        - Explicar la estructura de un JWT y qué protege su firma.
+        - "Guardar contraseñas y secretos de forma segura: hash y variables de entorno."
+        - Identificar los riesgos de una API con el OWASP API Security Top 10.
 
 - id: conectividad
   numero: 3

@@ -373,6 +373,10 @@
 /* Mensajes crudos (HTTP) dentro de una pila de capas. */
 .reveal .layers code.raw { display: block; padding: 0; background: none; font-size: 19px; line-height: 1.4; white-space: pre; overflow: hidden; }
 
+/* Código más pequeño cuando el fragmento es largo. */
+.reveal .code-sm pre { margin: 12px 0; }
+.reveal .code-sm pre code { font-size: 18px; max-height: 470px; }
+
 /* Tablas más pequeñas cuando hay mucho contenido. */
 .reveal .compact table { font-size: 0.62em; }
 .reveal .compact table td, .reveal .compact table th { padding: 6px 12px; }
@@ -385,7 +389,7 @@
 /* Diagramas SVG en línea. */
 .reveal svg.diagram { display: block; width: 100%; height: auto; margin: 8px auto; overflow: visible; }
 .reveal svg.diagram text { font-family: var(--font-ui); }
-.reveal svg.diagram .mono { font-family: var(--font-mono); }
+.reveal svg.diagram .mono, .reveal svg.diagram .mono text { font-family: var(--font-mono); }
 
 /* ─── Portada y separadores ─── */
 .reveal .slides section.portada,
